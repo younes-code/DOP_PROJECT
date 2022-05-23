@@ -14,7 +14,6 @@ from django.db.models import Q
 from .forms import *
 from .models import *
 
-
 def loginuser(request):
       if request.method=='POST':
             username=request.POST['username']
@@ -164,8 +163,10 @@ def search_project_region(request): #search project by region for recap
                              
 
 def project_form(request):
+      my_year=int(datetime.date.today().year)
       context= {
-            "form":add_project_Form
+            "form":add_project_Form,
+            "my_year":my_year
       }
       return render(request,'project_form.html',context)
 

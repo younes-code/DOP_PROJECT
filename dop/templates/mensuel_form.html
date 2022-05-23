@@ -16,7 +16,33 @@
             <div class="well well-sm">
               <form class="form-horizontal" action="{% url 'add_mensuel' %}" method="post">
                 {% csrf_token %}
-                {{form.as_p }}
+
+                <label class="form-label">Projet</label>
+                  <div class="mb-3">
+                    {{form.Project }}
+                  </div>
+
+                  <label class="form-label">Mois de Réalisation</label>
+                    <div class="mb-3">
+                      {{form.Mois_real }}
+                    </div>
+
+                <label class="form-label">Réalisation</label>
+                <div class="row">
+                  <div class="col">
+                    {{form.Montant_real_Total }}
+                  </div>
+                  <div class="col">
+                    {{form.Montant_real_Devise }}
+                  </div>
+                </div>
+                <br> 
+
+                <label class="form-label">Point de situation</label>
+                <div class="mb-3">
+                    {{form.Point_situation }}
+                  </div>
+                
               <fieldset>
     
                 <!-- Form actions -->

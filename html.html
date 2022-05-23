@@ -28,53 +28,52 @@
               <form class="form-horizontal" action="{% url 'add_project' %}" method="post">
                 {% csrf_token %}
                 <div class="mb-3">
-                  <label for="exampleInputEmail1" class="form-label">Compte_Analytique</label>
+                  <label class="form-label">Compte_Analytique</label>
                   {{form.Compte_Analytique }}
-                  <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+                  <div  class="form-text">We'll never share your email with anyone else.</div>
                 </div>
 
                 <div class="mb-3">
-                  <label for="exampleInputEmail1" class="form-label">Libelles</label>
+                  <label class="form-label">Libelles</label>
                   {{form.Libelles }}
-                  <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+                  <div  class="form-text">We'll never share your email with anyone else.</div>
                 </div>
 
                 <div class="mb-3">
-                  <label for="disabledSelect" class="form-label">Structure_gerante</label>
+                  <label class="form-label">Structure_gerante</label>
                     {{form.Structure_gerante }}
                   </select>
                 </div>
 
-                <div class="mb-3">
-                  <label for="disabledSelect" class="form-label">Perimetre</label>
+                <div class="m class="form-label">Perimetre</label>
                     {{form.Perimetre }}
                   </select>
                 </div>
                 <div class="mb-3">
-                  <label for="disabledSelect" class="form-label">Champ</label>
+                  <label class="form-label">Champ</label>
                     {{form.Champ }}
                   </select>
                 </div>
 
                 <div class="mb-3">
-                  <label for="disabledSelect" class="form-label">Famille</label>
+                  <label class="form-label">Famille</label>
                     {{form.Famille }}
                   </select>
                 </div>
 
                 <div class="mb-3">
-                  <label for="disabledSelect" class="form-label">Type</label>
+                  <label class="form-label">Type</label>
                     {{form.Type }}
                   </select>
                 </div>
 
                 <div class="mb-3">
-                  <label for="disabledSelect" class="form-label">Fiscalite</label>
+                  <label class="form-label">Fiscalite</label>
                     {{form.Fiscalite }}
                   </select>
                 </div>
 
-                <label for="disabledSelect" class="form-label">Realisation_cum_total</label>
+                <label class="form-label">Realisation_cum_total</label>
                 <div class="row">
                   <div class="col">
                     {{form.Realisation_cum_total }}
@@ -85,7 +84,7 @@
                 </div>
                 <br> 
 
-                <label for="disabledSelect" class="form-label">Realisation_S1_total</label>
+                <label class="form-label">Realisation_S1_total</label>
                 <div class="row">
                   <div class="col">
                     {{form.Realisation_S1_total }}
@@ -96,7 +95,7 @@
                 </div>
                 <br> 
 
-                <label for="disabledSelect" class="form-label">Prevision_S2_total</label>
+                <label class="form-label">Prevision_S2_total</label>
                 <div class="row">
                   <div class="col">
                     {{form.Prevision_S2_total }}
@@ -107,7 +106,7 @@
                 </div>
                 <br>
 
-                <label for="disabledSelect" class="form-label">Prevision_n_devise</label>
+                <label class="form-label">Prevision_n_devise</label>
                 <div class="row">
                   <div class="col">
                     {{form.Prevision_n_total }}
@@ -118,7 +117,7 @@
                 </div>
                 <br>
 
-                <label for="disabledSelect" class="form-label">Prevision_n1_devise</label>
+                <label class="form-label">Prevision_n1_devise</label>
                 <div class="row">
                   <div class="col">
                     {{form.Prevision_n1_total }}
@@ -129,7 +128,7 @@
                 </div>
                 <br>
                 
-                <label for="disabledSelect" class="form-label">Prevision_n2_devise</label>
+                <label class="form-label">Prevision_n2_devise</label>
                 <div class="row">
                   <div class="col">
                     {{form.Prevision_n2_total }}
@@ -140,7 +139,7 @@
                 </div>
                 <br> 
 
-                <label for="disabledSelect" class="form-label">Prevision_n3_devise</label>
+                <label class="form-label">Prevision_n3_devise</label>
                 <div class="row">
                   <div class="col">
                     {{form.Prevision_n3_total }}
@@ -151,7 +150,7 @@
                 </div>
                 <br> 
 
-                <label for="disabledSelect" class="form-label">Prevision_n4_devise</label>
+                <label class="form-label">Prevision_n4_devise</label>
                 <div class="row">
                   <div class="col">
                     {{form.Prevision_n4_total }}

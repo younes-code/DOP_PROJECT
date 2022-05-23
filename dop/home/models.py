@@ -109,7 +109,7 @@ class Project(models.Model):
     Prevision_n3_devise = models.FloatField(max_length=30,)
     Prevision_n4_total = models.FloatField(max_length=30,)
     Prevision_n4_devise = models.FloatField(max_length=30,)
-    Point_situation = models.CharField(max_length=1000)
+    Point_situation = models.TextField()
     Project_puit=models.CharField(max_length=50,null=True)
 
 
@@ -137,7 +137,7 @@ class Realisation_mensuelle(models.Model):
     prevision_mensuelle_id=models.ForeignKey(Prévision_mensuelle,on_delete=models.CASCADE,null=True)
     Montant_real_Total = models.FloatField(max_length=30)
     Montant_real_Devise = models.FloatField(max_length=30)
-    Point_situation = models.CharField(max_length=1000,)
+    Point_situation = models.TextField()
     Project=models.ForeignKey(Project, on_delete=models.CASCADE)
     real_cum_total=models.FloatField(default=0)#
     real_cum_devise=models.FloatField(default=0)#
@@ -183,7 +183,7 @@ class Stimulation(models.Model):
     Prevision_n3_devise = models.FloatField(max_length=30,)
     Prevision_n4_total = models.FloatField(max_length=30,)
     Prevision_n4_devise = models.FloatField(max_length=30,)
-    Point_situation = models.CharField(max_length=1000)
+    Point_situation = models.TextField()
     Project_puit=models.BooleanField(max_length=50,null=True)
 
     def __str__(self):
