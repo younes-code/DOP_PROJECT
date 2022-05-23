@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block homeactivate %}active {% endblock homeactivate %}
+{% block title %}Home{% endblock %}
+{% block content %}
+
+<div class="align-items-center mt-4">
+<form method="post" action="">
+    {% csrf_token %}
+    <h1>Êtes-vous sûr de vouloir supprimer ?</h1><br>
+    <input class="btn btn-danger" type="submit" value="Oui" />
+    <a href="##"><div class="btn btn-primary"  value="Input Button" onclick="history.go(-1); return false;">Annuler</div></a>
+</form>
+</div>
+
+{% endblock %}

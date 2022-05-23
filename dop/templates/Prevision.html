@@ -1,0 +1,275 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block Previsionsactivate %} active{% endblock Previsionsactivate %}
+{% block title %}Prevision Mensuels{% endblock %}
+{% load humanize %}
+{% block content %}
+
+<div class="div" style="width:1400px;">
+    <br>
+    <h1>Prévisions Mensuels</h1>
+        <table class="table table-striped table-bordered " style="width:100%" id="MonthDataTable" data-filter>
+            <div style="width: 300px;" class="float-left mb-2" >
+                <div class="input-group"><span class="input-group-text"><i class="fa fa-search"></i></span><input id="rechercher_p" class="form-control" type="text"  required placeholder="Region" onkeyup="Rechercher_prof()" /></div>
+                <div id="toolbar" class="mb-3 mt-3 float-left mb-2">
+                    <a href="/export_prevision" class="btn btn-primary float-right mb-3">Export</a>
+                   </div>
+            </div>  
+            <thead>
+                <tr>
+                    <th colspan='3'> </th>
+                    <th colspan='2'>Janvier</th>
+                    <th colspan='2'>Fevrier</th>
+                    <th colspan='2'>Mars</th>
+                    <th colspan='2'>Avril</th>
+                    <th colspan='2'>Mai</th>
+                    <th colspan='2'>Juin</th>
+                    <th colspan='2'>Juiller</th>
+                    <th colspan='2'>Aout</th>
+                    <th colspan='2'>Septembre</th>
+                    <th colspan='2'>Octobre</th>
+                    <th colspan='2'>Novombre</th>
+                    <th colspan='2'>Decembre</th>
+
+                </tr>
+                <tr>
+                    <th>id</th>
+                    <th>Region </th>
+                    <th>Cpte </th>
+                    <th>Libellé</th>
+                    <th>Total</th>
+                    <th>Don Devise</th>
+                    <th>Total</th>
+                    <th>Don Devise</th>
+                    <th>Total</th>
+                    <th>Don Devise</th>
+                    <th>Total</th>
+                    <th>Don Devise</th>
+                    <th>Total</th>
+                    <th>Don Devise</th>
+                    <th>Total</th>
+                    <th>Don Devise</th>
+                    <th>Total</th>
+                    <th>Don Devise</th>
+                    <th>Total</th>
+                    <th>Don Devise</th>
+                    <th>Total</th>
+                    <th>Don Devise</th>
+                    <th>Total</th>
+                    <th>Don Devise</th>
+                    <th>Total</th>
+                    <th>Don Devise</th>
+                    <th>Total</th>
+                    <th>Don Devise</th>
+                    
+                </tr>
+
+            </thead>
+            <tbody>
+                {% for smt in Prevision_stm %}
+                <tr name="prof_row">                
+                    {% for stm1 in Prevision_stm1 %}
+                        {% if stm1.Stimulation.id == pre.Stimulation and stm1.Mois_prev == 'janvier' %}
+                            <td>{{stm1.Stimulation.id}}</td>
+                            <td>{{stm1.Stimulation.Perimetre.region}}</td>
+                            <td>{{stm1.Stimulation.Compte_Analytique}}</td>
+                            <td>{{stm1.Stimulation.stimulation}}</td>
+                            <td>{{stm1.Montant_Prevu_Total|floatformat:"0"|intcomma}}</td>
+                            <td>{{stm1.Montant_Prevu_Devise|floatformat:"0"|intcomma}}</td>
+                            
+                        {% endif %}
+                        {% comment %}
+                        {% if pre1.Project.id == pre.Project and pre1.Mois_prev == 'fevrier' %}
+                            <td>{{pre1.Montant_Prevu_Total}}</td>
+                            <td>{{pre1.Montant_Prevu_Devise}}</td>
+                        {% endif %}
+                        {% endcomment %} 
+                        {% if stm1.Project.id == pre.Project and stm1.Mois_prev == 'mars' %}
+                            <td>{{stm1.Montant_Prevu_Total|floatformat:"0"|intcomma}}</td>
+                            <td>{{stm1.Montant_Prevu_Devise|floatformat:"0"|intcomma}}</td>
+                        {% endif %}
+                        {% if stm1.Project.id == pre.Project and stm1.Mois_prev == 'avril' %}
+                            <td>{{stm1.Montant_Prevu_Total|floatformat:"0"|intcomma}}</td>
+                            <td>{{stm1.Montant_Prevu_Devise|floatformat:"0"|intcomma}}</td>
+                        {% endif %}
+                        {% if stm1.Project.id == pre.Project and stm1.Mois_prev == 'mai' %}
+                            <td>{{stm1.Montant_Prevu_Total|floatformat:"0"|intcomma}}</td>
+                            <td>{{stm1.Montant_Prevu_Devise|floatformat:"0"|intcomma}}</td>
+                        {% endif %}
+                        {% if stm1.Project.id == pre.Project and stm1.Mois_prev == 'juin' %}
+                            <td>{{stm1.Montant_Prevu_Total|floatformat:"0"|intcomma}}</td>
+                            <td>{{stm1.Montant_Prevu_Devise|floatformat:"0"|intcomma}}</td>
+                        {% endif %}
+                        {% if stm1.Project.id == pre.Project and stm1.Mois_prev == 'juillet' %}
+                            <td>{{stm1.Montant_Prevu_Total|floatformat:"0"|intcomma}}</td>
+                            <td>{{stm1.Montant_Prevu_Devise|floatformat:"0"|intcomma}}</td>
+                        {% endif %}
+                        {% if stm1.Project.id == pre.Project and stm1.Mois_prev == 'fevrier' %}
+                            <td>{{stm1.Montant_Prevu_Total|floatformat:"0"|intcomma}}</td>
+                            <td>{{stm1.Montant_Prevu_Devise|floatformat:"0"|intcomma}}</td>
+                        {% endif %}
+                        {% if stm1.Project.id == pre.Project and stm1.Mois_prev == 'aout' %}
+                            <td>{{stm1.Montant_Prevu_Total|floatformat:"0"|intcomma}}</td>
+                            <td>{{stm1.Montant_Prevu_Devise|floatformat:"0"|intcomma}}</td>
+                        {% endif %}
+                        {% if stm1.Project.id == pre.Project and stm1.Mois_prev == 'septembre' %}
+                            <td>{{stm1.Montant_Prevu_Total|floatformat:"0"|intcomma}}</td>
+                            <td>{{stm1.Montant_Prevu_Devise|floatformat:"0"|intcomma}}</td>
+                        {% endif %}
+                        {% if stm1.Project.id == pre.Project and stm1.Mois_prev == 'octobre' %}
+                            <td>{{stm1.Montant_Prevu_Total|floatformat:"0"|intcomma}}</td>
+                            <td>{{stm1.Montant_Prevu_Devise|floatformat:"0"|intcomma}}</td>
+                        {% endif %}
+                        {% if stm1.Project.id == pre.Project and stm1.Mois_prev == 'novombre' %}
+                            <td>{{stm1.Montant_Prevu_Total|floatformat:"0"|intcomma}}</td>
+                            <td>{{stm1.Montant_Prevu_Devise|floatformat:"0"|intcomma}}</td>
+                        {% endif %}
+                        {% if stm1.Project.id == pre.Project and stm1.Mois_prev == 'decembre' %}
+                            <td>{{stm1.Montant_Prevu_Total|floatformat:"0"|intcomma}}</td>
+                            <td>{{stm1.Montant_Prevu_Devise|floatformat:"0"|intcomma}}</td>
+                        {% endif %}
+                    {% endfor %}
+                </tr>
+              {% endfor %}
+
+              {% for pre in Prevision %}
+                    <tr name="prof_row">                
+                        {% for pre1 in Prevision1 %}       
+                            {% if pre1.Project.id == pre.Project and pre1.Mois_prev == 'janvier' %}
+                                <td>{{pre1.Project.id}}</td>
+                                <td>{{pre1.Project.Perimetre.region}}</td>
+                                <td>{{pre1.Project.Compte_Analytique}}</td>
+                                <td>{{pre1.Project.Libelles}}</td>
+                                <td>{{pre1.Montant_Prevu_Total|floatformat:"0"|intcomma}}</td>
+                                <td>{{pre1.Montant_Prevu_Devise|floatformat:"0"|intcomma}}</td>
+                                
+                            {% endif %}
+                            {% comment %}
+                            {% if pre1.Project.id == pre.Project and pre1.Mois_prev == 'fevrier' %}
+                                <td>{{pre1.Montant_Prevu_Total}}</td>
+                                <td>{{pre1.Montant_Prevu_Devise}}</td>
+                            {% endif %}
+                            {% endcomment %} 
+                            {% if pre1.Project.id == pre.Project and pre1.Mois_prev == 'mars' %}
+                                <td>{{pre1.Montant_Prevu_Total|floatformat:"0"|intcomma}}</td>
+                                <td>{{pre1.Montant_Prevu_Devise|floatformat:"0"|intcomma}}</td>
+                            {% endif %}
+                            {% if pre1.Project.id == pre.Project and pre1.Mois_prev == 'avril' %}
+                                <td>{{pre1.Montant_Prevu_Total|floatformat:"0"|intcomma}}</td>
+                                <td>{{pre1.Montant_Prevu_Devise|floatformat:"0"|intcomma}}</td>
+                            {% endif %}
+                            {% if pre1.Project.id == pre.Project and pre1.Mois_prev == 'mai' %}
+                                <td>{{pre1.Montant_Prevu_Total|floatformat:"0"|intcomma}}</td>
+                                <td>{{pre1.Montant_Prevu_Devise|floatformat:"0"|intcomma}}</td>
+                            {% endif %}
+                            {% if pre1.Project.id == pre.Project and pre1.Mois_prev == 'juin' %}
+                                <td>{{pre1.Montant_Prevu_Total|floatformat:"0"|intcomma}}</td>
+                                <td>{{pre1.Montant_Prevu_Devise|floatformat:"0"|intcomma}}</td>
+                            {% endif %}
+                            {% if pre1.Project.id == pre.Project and pre1.Mois_prev == 'juillet' %}
+                                <td>{{pre1.Montant_Prevu_Total|floatformat:"0"|intcomma}}</td>
+                                <td>{{pre1.Montant_Prevu_Devise|floatformat:"0"|intcomma}}</td>
+                            {% endif %}
+                            {% if pre1.Project.id == pre.Project and pre1.Mois_prev == 'fevrier' %}
+                                <td>{{pre1.Montant_Prevu_Total|floatformat:"0"|intcomma}}</td>
+                                <td>{{pre1.Montant_Prevu_Devise|floatformat:"0"|intcomma}}</td>
+                            {% endif %}
+                            {% if pre1.Project.id == pre.Project and pre1.Mois_prev == 'aout' %}
+                                <td>{{pre1.Montant_Prevu_Total|floatformat:"0"|intcomma}}</td>
+                                <td>{{pre1.Montant_Prevu_Devise|floatformat:"0"|intcomma}}</td>
+                            {% endif %}
+                            {% if pre1.Project.id == pre.Project and pre1.Mois_prev == 'septembre' %}
+                                <td>{{pre1.Montant_Prevu_Total|floatformat:"0"|intcomma}}</td>
+                                <td>{{pre1.Montant_Prevu_Devise|floatformat:"0"|intcomma}}</td>
+                            {% endif %}
+                            {% if pre1.Project.id == pre.Project and pre1.Mois_prev == 'octobre' %}
+                                <td>{{pre1.Montant_Prevu_Total|floatformat:"0"|intcomma}}</td>
+                                <td>{{pre1.Montant_Prevu_Devise|floatformat:"0"|intcomma}}</td>
+                            {% endif %}
+                            {% if pre1.Project.id == pre.Project and pre1.Mois_prev == 'novombre' %}
+                                <td>{{pre1.Montant_Prevu_Total|floatformat:"0"|intcomma}}</td>
+                                <td>{{pre1.Montant_Prevu_Devise|floatformat:"0"|intcomma}}</td>
+                            {% endif %}
+                            {% if pre1.Project.id == pre.Project and pre1.Mois_prev == 'decembre' %}
+                                <td>{{pre1.Montant_Prevu_Total|floatformat:"0"|intcomma}}</td>
+                                <td>{{pre1.Montant_Prevu_Devise|floatformat:"0"|intcomma}}</td>
+                            {% endif %}
+                        {% endfor %}
+                    </tr>
+              {% endfor %}
+        </tbody>
+
+        </table>
+
+    </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+
+        <script>
+            function Rechercher_prof() {
+		  
+                var input, filter, table, tr, td, i, txtValue;
+                input = document.getElementById("rechercher_p");
+                filter = input.value.toUpperCase();
+                tr = document.getElementsByName("prof_row");
+                
+                console.log(tr.length)
+                for (i = 0; i < tr.length; i++) {
+                  td = tr[i].getElementsByTagName("td")[0];
+                  if (td) {
+                    txtValue = td.textContent || td.innerText;
+                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                      tr[i].style.display = "";
+                    } else {
+                      tr[i].style.display = "none";
+                    }
+                  }
+                }
+              };
+
+            $(document).ready(function() {
+            $('#MonthDataTable').DataTable({
+                columnDefs: [
+                { targets: [0],
+                className: "hide_column"
+                }
+                ],
+                order: [[0]],
+                dom: 'Bfrtip',
+                buttons: [],
+                "scrollX": true,
+                pageLength: 5,
+                "aLengthMenu": [
+                    [5, 10, 25, 50, -1],
+                    [5, 10, 25, 50, "Tout"]
+                ],
+                /*"scrollY": 400,*/
+    
+                "language": {
+                    "lengthMenu": "Afficher _MENU_",
+                    "search": "Recherche",
+                    "zeroRecords": "aucun projet disponible",
+                    "info": "Montrant _PAGE_ de _PAGES_ pages",
+                    "infoEmpty": "aucun projet disponible",
+                    "infoFiltered": "(filtré a partir de _MAX_ projets)",
+                    "paginate": {
+                        "first": "Premier",
+                        "last": "Dernier",
+                        "next": "Suivant",
+                        "previous": "Précédednt"
+    
+                    },
+                },
+            });});
+        </script>
+        <style>
+            .hide_column {
+                display : none;
+            }
+        </style>
+
+    {% endblock %}

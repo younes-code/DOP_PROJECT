@@ -1,0 +1,46 @@
+{% extends 'base.html' %} 
+{% load static %} 
+{% block title %}Prevision Mensuels form{% endblock %}
+
+{% block content %}
+{% if messages %}
+{% for message in messages %}
+  <div class="alert {{ message.tags }} alert-dismissible shadow fade show" role="alert">
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+      </button>
+      {{ message | safe }}
+  </div>
+{% endfor %}
+{% endif %}
+<div class="container">
+    <br>
+    <h1>Les Prévisions mensuels </h1>
+    <br>
+    {% if submitted %} 
+        Monthly Report added successfuly !! 
+    {% else %}
+    <div class="container">
+
+          <div class="col-md-6 col-md-offset-3">
+            <div class="well well-sm">
+              <form class="form-horizontal" action="{% url 'add_prevision' %}" method="post">
+                {% csrf_token %}
+                {{form.as_p }}
+              <fieldset>
+    
+                <!-- Form actions -->
+                <div class="form-group">
+                  <div class="col-md-12 text-right">
+                    <button type="submit" class="btn btn-secondary">Ajouter</button>
+                  </div>
+                </div>
+              </fieldset>
+              </form>
+            </div>
+          </div>
+    </div>
+    {% endif %} 
+</div>
+
+{% endblock %}

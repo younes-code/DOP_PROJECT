@@ -1,0 +1,333 @@
+{% extends 'base.html' %} 
+{% load static %} 
+{% block title %}PMT{% endblock %} 
+{% load humanize %}
+{% block pmtactivate %}active{% endblock pmtactivate %}
+{% block content %}
+{% if messages %}
+{% for message in messages %}
+  <div class="alert {{ message.tags }} alert-dismissible shadow fade show" role="alert">
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+      </button>
+      {{ message | safe }}
+  </div>
+{% endfor %}
+{% endif %}
+
+<div class="div" style="width:1400px;">
+    <div style="line-height:700%;">  
+        <br>
+    </div>
+        <h1 class="float-left">Veuillez choisir le format d'exportation : </h1>
+        <br>
+
+    <table class="table table-striped table-bordered " style="display: none;" id="mydatatable" data-filter >
+       <div style="width: 300px;" class="float-left mb-2" >
+    </div>
+       
+       
+        <thead >
+            <tr>
+                <th colspan='10'></th>
+                <th colspan='2'>Cout Globale initial</th>
+                <th colspan='2'>Réalisation cumulées au cout réel</th>
+                <th colspan='2'>Réalisation S1</th>
+                <th colspan='2'>Prévision S2</th>
+                <th colspan='2'>Prévision de cloture</th>
+                <th colspan='2'>Reste à réaliser</th>
+                <th colspan='2'>Prévision {{ my_year |add:"0" }}</th>
+                <th colspan='2'>Prévision {{ my_year |add:"+1" }}</th>
+                <th colspan='2'>Prévision {{ my_year |add:"+2" }}</th>
+                <th colspan='2'>Prévision {{ my_year |add:"+3" }}</th>
+                <th colspan='2'>Prévision {{ my_year |add:"+4" }}</th>
+                {% if user.is_superuser %}
+                <th colspan='1'></th>
+                {% endif %}
+            </tr>
+            <tr>
+                <th>Cpte</th>
+                <th>Libelles</th>
+                <th>Activité de Périmetre</th>
+                <th>Structure gérante</th>
+                <th>Region</th>
+                <th>Perimetre</th>
+                <th>Champ</th>
+                <th>Famille</th>
+                <th>Type</th>
+                <th>Fiscalite</th>
+                <th>Total</th>
+                <th>Don Devise</th>
+                <th>Total</th>
+                <th>Don Devise</th>
+                <th>Total</th>
+                <th>Don Devise</th>
+                <th>Total</th>
+                <th>Don Devise</th>
+                <th>Total</th>
+                <th>Don Devise</th>
+                <th>Total</th>
+                <th>Don Devise</th>
+                <th>Total</th>
+                <th>Don Devise</th>
+                <th>Total</th>
+                <th>Don Devise</th>
+                <th>Total</th>
+                <th>Don Devise</th>
+                <th>Total</th>
+                <th>Don Devise</th>
+                <th>Total</th>
+                <th>Don Devise</th>
+                <th>Point de situation</th>
+                {% if user.is_superuser %}
+                <th></th>
+                {% endif %}
+
+            </tr>
+            <tr style="display: none;">
+                <th>id</th> 
+                <th>Cpte</th>
+                <th>Libelles</th>
+                <th>Activité de Périmetre</th>
+                <th>Structure gérante</th>
+                <th>Region</th>
+                <th>Perimetre</th>
+                <th>Champ</th>
+                <th>Famille</th>
+                <th>Type</th>
+                <th>Fiscalite</th>
+                <th>Cout Globale initial Total</th>
+                <th>Cout Globale initial Don Devise</th>
+                <th>Réalisation cumulées au cout réel Total</th>
+                <th>Réalisation cumulées au cout réel Don Devise</th>
+                <th>Réalisation S1 Total</th>
+                <th>Réalisation S1 Don Devise</th>
+                <th>Réalisation S2 Total</th>
+                <th>Réalisation S2 Don Devise</th>
+                <th>Prévision de cloture Total</th>
+                <th>Prévision de cloture Don Devise</th>
+                <th>Reste à réaliser Total</th>
+                <th>Reste à réaliser Don Devise</th>
+                <th>Prévision {{ my_year |add:"0" }} Total</th>
+                <th>Prévision {{ my_year |add:"0" }} Don Devise</th>
+                <th>Prévision {{ my_year |add:"+1" }} Total</th>
+                <th>Prévision {{ my_year |add:"+1" }} Don Devise</th>
+                <th>Prévision {{ my_year |add:"+2" }} Total</th>
+                <th>Prévision {{ my_year |add:"+2" }}Don Devise</th>
+                <th>Prévision {{ my_year |add:"+3" }} Total</th>
+                <th>Prévision {{ my_year |add:"+3" }} Don Devise</th>
+                <th>Prévision {{ my_year |add:"+4" }} Total</th>
+                <th>Prévision {{ my_year |add:"+4" }} Don Devise</th>
+                <th>Point de situation</th>
+                {% if user.is_superuser %}
+                <th></th>
+                {% endif %}
+
+            </tr>
+        </thead>
+        <tbody>
+            {% for stimulation in stimulations %}
+            <tr name="region_row">
+                <td>{{stimulation.id}}</td>
+                <td>{{stimulation.Compte_Analytique}}</td>
+                <td>{{stimulation.stimulation}}</td>
+                <td>{{stimulation.Perimetre.activite}}</td>
+                <td>{{stimulation.Structure_gerante}}</td>
+                <td>{{stimulation.Perimetre.region}}</td>
+                <td>{{stimulation.Perimetre}}</td>
+                <td>{{stimulation.champ|default_if_none:"/"}}</td>
+                <td>{{stimulation.Famille}}</td>
+                <td>{{stimulation.Type|default_if_none:"/"}}</td>
+                <td>{{stimulation.Fiscalite}}</td>
+                <td>{{stimulation.Cout_Globale_initial_total}}</td>
+                <td>{{stimulation.Cout_Globale_initial_devise}}</td>
+                <td>{{stimulation.Realisation_cum_total}}</td>
+                <td>{{stimulation.Realisation_cum_devise}}</td>
+                <td>{{stimulation.Realisation_S1_total}}</td>
+                <td>{{stimulation.Realisation_S1_devise}}</td>
+                <td>{{stimulation.Prevision_S2_total}}</td>
+                <td>{{stimulation.Prevision_S2_devise}}</td>
+                <td>{{stimulation.Previson_de_cloture_total}}</td>
+                <td>{{stimulation.Previson_de_cloture_devise}}</td>
+                <td>{{stimulation.Reste_a_realiser_total}}</td>
+                <td>{{stimulation.Reste_a_realiser_devise}}</td>
+                <td>{{stimulation.Prevision_n_total}}</td>
+                <td>{{stimulation.Prevision_n_devise}}</td>
+                <td>{{stimulation.Prevision_n1_total}}</td>
+                <td>{{stimulation.Prevision_n1_devise}}</td>
+                <td>{{stimulation.Prevision_n2_total}}</td>
+                <td>{{stimulation.Prevision_n2_devise}}</td>
+                <td>{{stimulation.Prevision_n3_total}}</td>
+                <td>{{stimulation.Prevision_n3_devise}}</td>
+                <td>{{stimulation.Prevision_n4_total}}</td>
+                <td>{{stimulation.Prevision_n4_devise}}</td>
+                <td>{{stimulation.Point_situation}}</td>
+                {% if user.is_superuser %}
+                <td><a href="{% url 'delete_project' stimulation.stimulation_id %}" class="btn btn-outline-danger btn-sm ">
+                    supprimer</a></td>
+                {% endif %}
+            </tr>   
+            {% endfor %}
+            {% for Project in projects %}
+            <tr name="region_row">
+                <td>{{Project.id}}</td>
+                <td>{{Project.Compte_Analytique}}</td>
+                <td>{{Project.Libelles}}</td>
+                <td>{{Project.Perimetre.activite}}</td>
+                <td>{{Project.Structure_gerante}}</td>
+                <td>{{Project.Perimetre.region}}</td>
+                <td>{{Project.Perimetre}}</td>
+                <td>{{Project.champ|default_if_none:"/"}}</td>
+                <td>{{Project.Famille}}</td>
+                <td>{{Project.Type|default_if_none:"/"}}</td>
+                <td>{{Project.Fiscalite}}</td>
+                <td>{{Project.Cout_Globale_initial_total}}</td>
+                <td>{{Project.Cout_Globale_initial_devise}}</td>
+                <td>{{Project.Realisation_cum_total}}</td>
+                <td>{{Project.Realisation_cum_devise}}</td>
+                <td>{{Project.Realisation_S1_total}}</td>
+                <td>{{Project.Realisation_S1_devise}}</td>
+                <td>{{Project.Prevision_S2_total}}</td>
+                <td>{{Project.Prevision_S2_devise}}</td>
+                <td>{{Project.Previson_de_cloture_total}}</td>
+                <td>{{Project.Previson_de_cloture_devise}}</td>
+                <td>{{Project.Reste_a_realiser_total}}</td>
+                <td>{{Project.Reste_a_realiser_devise}}</td>
+                <td>{{Project.Prevision_n_total}}</td>
+                <td>{{Project.Prevision_n1_total}}</td>
+                <td>{{Project.Prevision_n_devise}}</td>
+                <td>{{Project.Prevision_n1_devise}}</td>
+                <td>{{Project.Prevision_n2_total}}</td>
+                <td>{{Project.Prevision_n2_devise}}</td>
+                <td>{{Project.Prevision_n3_total}}</td>
+                <td>{{Project.Prevision_n3_devise}}</td>
+                <td>{{Project.Prevision_n4_total}}</td>
+                <td>{{Project.Prevision_n4_devise}}</td>
+                <td>{{Project.Point_situation}}</td>
+                {% if user.is_superuser %}
+                <td>
+                    <a href="{% url 'update_project' Project.id %}" class="btn btn-outline-primary btn-sm ">
+                        Update</a> 
+                        <div style="line-height:50%;">  
+                            <br>
+                        </div>
+                    <a href="{% url 'delete_project' Project.id %}" class="btn btn-outline-danger btn-sm ">
+                    supprimer</a>
+                </td>  
+                {% endif %}
+            </tr>   
+            {% endfor %}
+        </tbody>
+
+    </table>
+
+</div>
+
+
+
+
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+<script>
+
+    function Rechercher_region() {
+		  
+        var input, filter, table, tr, td, i, txtValue;
+        input = document.getElementById("rechercher_p");
+        filter = input.value.toUpperCase();
+        tr = document.getElementsByName("region_row");
+        
+        console.log(tr.length)
+        for (i = 0; i < tr.length; i++) {
+          td = tr[i].getElementsByTagName("td")[5];
+          if (td) {
+            txtValue = td.textContent || td.innerText;
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+              tr[i].style.display = "";
+            } else {
+              tr[i].style.display = "none";
+            }
+          }
+        }
+      };
+
+    $(document).ready(function () {
+        $('#mydatatable').DataTable({
+            "paging": false,
+            "bInfo": false,
+            "bPaginate": false,
+            columnDefs: [
+            { targets: [0],
+            className: "hide_column"
+            }
+            ],
+            order: [[0]],
+            dom: 'Bfrtip',
+            buttons: [
+            {
+                extend: 'copyHtml5',
+                exportOptions: {
+                    columns: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33]
+
+                }
+            },
+            {
+                extend: 'excelHtml5',
+                exportOptions: {
+                    columns: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33]
+
+                }
+            },
+            {
+                extend: 'csvHtml5',
+                exportOptions: {
+                    columns: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33]
+
+                }
+            },
+            'colvis'
+
+            ],
+
+
+            /*"scrollY": 400,*/
+            pageLength: 5,
+            "aLengthMenu": [
+                [6, 10, 25, 50, -1],
+                [6, 10, 25, 50, "Tout"]
+            ],
+            
+
+            "language": {
+                "lengthMenu": "Afficher _MENU_",
+                "search": "Recherche",
+                "zeroRecords": "aucun projet disponible",
+                "info": "Montrant _PAGE_ de _PAGES_ pages",
+                "infoEmpty": "aucun projet disponible",
+                "infoFiltered": "(filtré a partir de _MAX_ projets)",
+                "paginate": {
+                    "first": "Premier",
+                    "last": "Dernier",
+                    "next": "Suivant",
+                    "previous": "Précédednt"
+
+                },
+            },
+        });
+    });
+</script>
+<style>
+    .hide_column {
+        display : none;
+    },
+
+    .dt-buttons{
+        left:50%;
+        }
+
+</style>
+{% endblock %}
