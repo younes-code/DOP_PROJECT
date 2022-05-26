@@ -421,12 +421,12 @@ class add_realisation_form(forms.Form):
       
       Montant_real_Total = forms.FloatField(
       widget=forms.NumberInput(attrs={
-            'placeholder':'En Kilo Dinar',
+            'placeholder':'Total',
             'class':'form-control form-control-user',
       }))
       Montant_real_Devise = forms.FloatField(
       widget=forms.NumberInput(attrs={
-            'placeholder':'En Kilo Dinar',
+            'placeholder':'Don devise',
             'class':'form-control form-control-user',
 
       }))

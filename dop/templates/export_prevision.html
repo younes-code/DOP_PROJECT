@@ -116,8 +116,8 @@
                     <td>{{stm1.Stimulation.Perimetre.region}}</td>
                     <td>{{stm1.Stimulation.Compte_Analytique}}</td>
                     <td>{{stm1.Stimulation.stimulation}}</td>
-                    <td>{{stm1.Montant_Prevu_Total}}</td>
-                    <td>{{stm1.Montant_Prevu_Devise}}</td>
+                    <td>{{stm1.Montant_Prevu_Total|floatformat:"0"|intcomma}}</td>
+                    <td>{{stm1.Montant_Prevu_Devise|floatformat:"0"|intcomma}}</td>
                     
                 {% endif %}
                 {% comment %}
@@ -127,48 +127,48 @@
                 {% endif %}
                 {% endcomment %} 
                 {% if stm1.Project.id == pre.Project and stm1.Mois_prev == 'mars' %}
-                    <td>{{stm1.Montant_Prevu_Total}}</td>
-                    <td>{{stm1.Montant_Prevu_Devise}}</td>
+                    <td>{{stm1.Montant_Prevu_Total|floatformat:"0"|intcomma}}</td>
+                    <td>{{stm1.Montant_Prevu_Devise|floatformat:"0"|intcomma}}</td>
                 {% endif %}
                 {% if stm1.Project.id == pre.Project and stm1.Mois_prev == 'avril' %}
-                    <td>{{stm1.Montant_Prevu_Total}}</td>
-                    <td>{{stm1.Montant_Prevu_Devise}}</td>
+                    <td>{{stm1.Montant_Prevu_Total|floatformat:"0"|intcomma}}</td>
+                    <td>{{stm1.Montant_Prevu_Devise|floatformat:"0"|intcomma}}</td>
                 {% endif %}
                 {% if stm1.Project.id == pre.Project and stm1.Mois_prev == 'mai' %}
-                    <td>{{stm1.Montant_Prevu_Total}}</td>
-                    <td>{{stm1.Montant_Prevu_Devise}}</td>
+                    <td>{{stm1.Montant_Prevu_Total|floatformat:"0"|intcomma}}</td>
+                    <td>{{stm1.Montant_Prevu_Devise|floatformat:"0"|intcomma}}</td>
                 {% endif %}
                 {% if stm1.Project.id == pre.Project and stm1.Mois_prev == 'juin' %}
-                    <td>{{stm1.Montant_Prevu_Total}}</td>
-                    <td>{{stm1.Montant_Prevu_Devise}}</td>
+                    <td>{{stm1.Montant_Prevu_Total|floatformat:"0"|intcomma}}</td>
+                    <td>{{stm1.Montant_Prevu_Devise|floatformat:"0"|intcomma}}</td>
                 {% endif %}
                 {% if stm1.Project.id == pre.Project and stm1.Mois_prev == 'juillet' %}
-                    <td>{{stm1.Montant_Prevu_Total}}</td>
-                    <td>{{stm1.Montant_Prevu_Devise}}</td>
+                    <td>{{stm1.Montant_Prevu_Total|floatformat:"0"|intcomma}}</td>
+                    <td>{{stm1.Montant_Prevu_Devise|floatformat:"0"|intcomma}}</td>
                 {% endif %}
                 {% if stm1.Project.id == pre.Project and stm1.Mois_prev == 'fevrier' %}
-                    <td>{{stm1.Montant_Prevu_Total}}</td>
-                    <td>{{stm1.Montant_Prevu_Devise}}</td>
+                    <td>{{stm1.Montant_Prevu_Total|floatformat:"0"|intcomma}}</td>
+                    <td>{{stm1.Montant_Prevu_Devise|floatformat:"0"|intcomma}}</td>
                 {% endif %}
                 {% if stm1.Project.id == pre.Project and stm1.Mois_prev == 'aout' %}
-                    <td>{{stm1.Montant_Prevu_Total}}</td>
-                    <td>{{stm1.Montant_Prevu_Devise}}</td>
+                    <td>{{stm1.Montant_Prevu_Total|floatformat:"0"|intcomma}}</td>
+                    <td>{{stm1.Montant_Prevu_Devise|floatformat:"0"|intcomma}}</td>
                 {% endif %}
                 {% if stm1.Project.id == pre.Project and stm1.Mois_prev == 'septembre' %}
-                    <td>{{stm1.Montant_Prevu_Total}}</td>
-                    <td>{{stm1.Montant_Prevu_Devise}}</td>
+                    <td>{{stm1.Montant_Prevu_Total|floatformat:"0"|intcomma}}</td>
+                    <td>{{stm1.Montant_Prevu_Devise|floatformat:"0"|intcomma}}</td>
                 {% endif %}
                 {% if stm1.Project.id == pre.Project and stm1.Mois_prev == 'octobre' %}
-                    <td>{{stm1.Montant_Prevu_Total}}</td>
-                    <td>{{stm1.Montant_Prevu_Devise}}</td>
+                    <td>{{stm1.Montant_Prevu_Total|floatformat:"0"|intcomma}}</td>
+                    <td>{{stm1.Montant_Prevu_Devise|floatformat:"0"|intcomma}}</td>
                 {% endif %}
                 {% if stm1.Project.id == pre.Project and stm1.Mois_prev == 'novombre' %}
-                    <td>{{stm1.Montant_Prevu_Total}}</td>
-                    <td>{{stm1.Montant_Prevu_Devise}}</td>
+                    <td>{{stm1.Montant_Prevu_Total|floatformat:"0"|intcomma}}</td>
+                    <td>{{stm1.Montant_Prevu_Devise|floatformat:"0"|intcomma}}</td>
                 {% endif %}
                 {% if stm1.Project.id == pre.Project and stm1.Mois_prev == 'decembre' %}
-                    <td>{{stm1.Montant_Prevu_Total}}</td>
-                    <td>{{stm1.Montant_Prevu_Devise}}</td>
+                    <td>{{stm1.Montant_Prevu_Total|floatformat:"0"|intcomma}}</td>
+                    <td>{{stm1.Montant_Prevu_Devise|floatformat:"0"|intcomma}}</td>
                 {% endif %}
             {% endfor %}
         </tr>
@@ -182,8 +182,8 @@
                         <td>{{pre1.Project.Perimetre.region}}</td>
                         <td>{{pre1.Project.Compte_Analytique}}</td>
                         <td>{{pre1.Project.Libelles}}</td>
-                        <td>{{pre1.Montant_Prevu_Total}}</td>
-                        <td>{{pre1.Montant_Prevu_Devise}}</td>
+                        <td>{{pre1.Montant_Prevu_Total|floatformat:"0"|intcomma}}</td>
+                        <td>{{pre1.Montant_Prevu_Devise|floatformat:"0"|intcomma}}</td>
                         
                     {% endif %}
                     {% comment %}
@@ -193,48 +193,48 @@
                     {% endif %}
                     {% endcomment %} 
                     {% if pre1.Project.id == pre.Project and pre1.Mois_prev == 'mars' %}
-                        <td>{{pre1.Montant_Prevu_Total}}</td>
-                        <td>{{pre1.Montant_Prevu_Devise}}</td>
+                        <td>{{pre1.Montant_Prevu_Total|floatformat:"0"|intcomma}}</td>
+                        <td>{{pre1.Montant_Prevu_Devise|floatformat:"0"|intcomma}}</td>
                     {% endif %}
                     {% if pre1.Project.id == pre.Project and pre1.Mois_prev == 'avril' %}
-                        <td>{{pre1.Montant_Prevu_Total}}</td>
-                        <td>{{pre1.Montant_Prevu_Devise}}</td>
-
+                        <td>{{pre1.Montant_Prevu_Total|floatformat:"0"|intcomma}}</td>
+                        <td>{{pre1.Montant_Prevu_Devise|floatformat:"0"|intcomma}}</td>
+                    {% endif %}
                     {% if pre1.Project.id == pre.Project and pre1.Mois_prev == 'mai' %}
-                        <td>{{pre1.Montant_Prevu_Total}}</td>
-                        <td>{{pre1.Montant_Prevu_Devise}}</td>
+                        <td>{{pre1.Montant_Prevu_Total|floatformat:"0"|intcomma}}</td>
+                        <td>{{pre1.Montant_Prevu_Devise|floatformat:"0"|intcomma}}</td>
                     {% endif %}
                     {% if pre1.Project.id == pre.Project and pre1.Mois_prev == 'juin' %}
-                        <td>{{pre1.Montant_Prevu_Total}}</td>
-                        <td>{{pre1.Montant_Prevu_Devise}}</td>
+                        <td>{{pre1.Montant_Prevu_Total|floatformat:"0"|intcomma}}</td>
+                        <td>{{pre1.Montant_Prevu_Devise|floatformat:"0"|intcomma}}</td>
                     {% endif %}
                     {% if pre1.Project.id == pre.Project and pre1.Mois_prev == 'juillet' %}
-                        <td>{{pre1.Montant_Prevu_Total}}</td>
-                        <td>{{pre1.Montant_Prevu_Devise}}</td>
+                        <td>{{pre1.Montant_Prevu_Total|floatformat:"0"|intcomma}}</td>
+                        <td>{{pre1.Montant_Prevu_Devise|floatformat:"0"|intcomma}}</td>
                     {% endif %}
                     {% if pre1.Project.id == pre.Project and pre1.Mois_prev == 'fevrier' %}
-                        <td>{{pre1.Montant_Prevu_Total}}</td>
-                        <td>{{pre1.Montant_Prevu_Devise}}</td>
+                        <td>{{pre1.Montant_Prevu_Total|floatformat:"0"|intcomma}}</td>
+                        <td>{{pre1.Montant_Prevu_Devise|floatformat:"0"|intcomma}}</td>
                     {% endif %}
                     {% if pre1.Project.id == pre.Project and pre1.Mois_prev == 'aout' %}
-                        <td>{{pre1.Montant_Prevu_Total}}</td>
-                        <td>{{pre1.Montant_Prevu_Devise}}</td>
+                        <td>{{pre1.Montant_Prevu_Total|floatformat:"0"|intcomma}}</td>
+                        <td>{{pre1.Montant_Prevu_Devise|floatformat:"0"|intcomma}}</td>
                     {% endif %}
                     {% if pre1.Project.id == pre.Project and pre1.Mois_prev == 'septembre' %}
-                        <td>{{pre1.Montant_Prevu_Total}}</td>
-                        <td>{{pre1.Montant_Prevu_Devise}}</td>
+                        <td>{{pre1.Montant_Prevu_Total|floatformat:"0"|intcomma}}</td>
+                        <td>{{pre1.Montant_Prevu_Devise|floatformat:"0"|intcomma}}</td>
                     {% endif %}
                     {% if pre1.Project.id == pre.Project and pre1.Mois_prev == 'octobre' %}
-                        <td>{{pre1.Montant_Prevu_Total}}</td>
-                        <td>{{pre1.Montant_Prevu_Devise}}</td>
+                        <td>{{pre1.Montant_Prevu_Total|floatformat:"0"|intcomma}}</td>
+                        <td>{{pre1.Montant_Prevu_Devise|floatformat:"0"|intcomma}}</td>
                     {% endif %}
                     {% if pre1.Project.id == pre.Project and pre1.Mois_prev == 'novombre' %}
-                        <td>{{pre1.Montant_Prevu_Total}}</td>
-                        <td>{{pre1.Montant_Prevu_Devise}}</td>
+                        <td>{{pre1.Montant_Prevu_Total|floatformat:"0"|intcomma}}</td>
+                        <td>{{pre1.Montant_Prevu_Devise|floatformat:"0"|intcomma}}</td>
                     {% endif %}
                     {% if pre1.Project.id == pre.Project and pre1.Mois_prev == 'decembre' %}
-                        <td>{{pre1.Montant_Prevu_Total}}</td>
-                        <td>{{pre1.Montant_Prevu_Devise}}</td>
+                        <td>{{pre1.Montant_Prevu_Total|floatformat:"0"|intcomma}}</td>
+                        <td>{{pre1.Montant_Prevu_Devise|floatformat:"0"|intcomma}}</td>
                     {% endif %}
                 {% endfor %}
             </tr>

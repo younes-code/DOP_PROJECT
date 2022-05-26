@@ -60,6 +60,20 @@ def Reste_a_realiser (Prevision_n1,Prevision_n2,Prevision_n3,Prevision_n4):
 
 # Create your views here.
 ########################################## Models views ##############################################
+def export_recap(request):
+      my_year=int(datetime.date.today().year)
+      user=request.user
+      if user.is_staff:
+            year=datetime.date.today().year+0
+            obj=Recap.objects.filter(PMT=year)
+            return render(request,'export_recap.html',{'recaps':obj,'form1':search_form,'form2':search_form_region,'my_year':my_year})
+
+      i = Acces.objects.get(user=request.user) 
+      p = Perimetre.objects.filter(region=i.region)
+      year=datetime.date.today().year+0
+      obj=Recap.objects.filter(Perimetre=p[0],PMT=year)
+      return render(request,'export_recap.html',{'recaps':obj,'form1':search_form,'form2':search_form_region,'my_year':my_year})
+
 def recap(request):
       my_year=int(datetime.date.today().year)
       user=request.user
@@ -73,6 +87,20 @@ def recap(request):
       year=datetime.date.today().year+0
       obj=Recap.objects.filter(Perimetre=p[0],PMT=year)
       return render(request,'PMT.html',{'recaps':obj,'form1':search_form,'form2':search_form_region,'my_year':my_year})
+
+def export_region(request):
+      my_year=int(datetime.date.today().year)
+      user=request.user
+      if user.is_staff:
+            year=datetime.date.today().year+0
+            obj=Recap_region.objects.filter(PMT=year)
+            return render(request,'export_region.html',{'Recap_regs':obj,'form1':search_form,'my_year':my_year})
+
+      i = Acces.objects.get(user=request.user) 
+      p = Perimetre.objects.filter(region=i.region)
+      year=datetime.date.today().year+0
+      obj=Recap_region.objects.filter(Perimetre=p[0],PMT=year)
+      return render(request,'export_region.html',{'Recap_regs':obj,'form1':search_form,'my_year':my_year})
 
 
 def recap_reg(request):
@@ -89,6 +117,20 @@ def recap_reg(request):
       obj=Recap_region.objects.filter(Perimetre=p[0],PMT=year)
       return render(request,'Recap_reg.html',{'Recap_regs':obj,'form1':search_form,'my_year':my_year})
 
+def export_famille(request):
+      my_year=int(datetime.date.today().year)
+      user=request.user
+      if user.is_staff:
+            year=datetime.date.today().year+0
+            obj=Recap_famille.objects.filter(PMT=year)
+            return render(request,'export_famille.html',{'recap_fams':obj,'form1':search_form,'form2':search_form_region,'my_year':my_year})
+
+      i = Acces.objects.get(user=request.user) 
+      p = Perimetre.objects.filter(region=i.region)
+      year=datetime.date.today().year+0
+      obj=Recap_famille.objects.filter(Perimetre=p[0],PMT=year)
+      return render(request,'export_famille.html',{'recap_fams':obj,'form1':search_form,'form2':search_form_region,'my_year':my_year})
+
 def recap_fam(request):
       my_year=int(datetime.date.today().year)
       user=request.user
@@ -101,7 +143,22 @@ def recap_fam(request):
       p = Perimetre.objects.filter(region=i.region)
       year=datetime.date.today().year+0
       obj=Recap_famille.objects.filter(Perimetre=p[0],PMT=year)
-      return render(request,'PMT.html',{'recap_fams':obj,'form1':search_form,'form2':search_form_region,'my_year':my_year})
+      return render(request,'recap_fam.html',{'recap_fams':obj,'form1':search_form,'form2':search_form_region,'my_year':my_year})
+
+def export_activite(request):
+      my_year=int(datetime.date.today().year)
+      user=request.user
+      if user.is_staff:
+            year=datetime.date.today().year+0
+            obj=Recap_activite.objects.filter(PMT=year)
+            return render(request,'export_activite.html',{'recap_acts':obj,'form1':search_form,'my_year':my_year})
+
+      i = Acces.objects.get(user=request.user) 
+      p = Perimetre.objects.filter(region=i.region)
+      year=datetime.date.today().year+0
+      obj=Recap_activite.objects.filter(Perimetre=p[0],PMT=year)
+      return render(request,'export_activite.html',{'recap_acts':obj,'form1':search_form,'my_year':my_year})
+
 
 def recap_act(request):
       my_year=int(datetime.date.today().year)
@@ -637,6 +694,22 @@ def add_project(request):
             if 'submitted' in request.GET:
                   submitted=True
       return render(request,'PMT.html',{'form':form,'submitted':submitted})      
+
+def export_mensuel(request):
+      user=request.user
+      if user.is_staff:
+            year=int(datetime.date.today().year)
+            obj=Realisation_mensuelle.objects.filter(PMT=year)
+            return render(request,'export_mensuel.html',{'Mensuel':obj,'form1':search_form,'form2':search_form_region,
+            'form3':search_month_form})
+
+      i = Acces.objects.get(user=request.user) 
+      p = Perimetre.objects.filter(region=i.region)
+      year=datetime.date.today().year+0
+      obj1=Project.objects.filter(Perimetre=p[0],PMT=year)
+      obj=Realisation_mensuelle.objects.filter(Project__in=obj1)
+      return render(request,'export_mensuel.html',{'Mensuel':obj,'form1':search_form,'form2':search_form_region,
+      'form3':search_month_form}) 
 
 def Mensuel(request):
       user=request.user

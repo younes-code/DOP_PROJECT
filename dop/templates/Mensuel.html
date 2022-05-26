@@ -35,11 +35,14 @@
         <table class="table table-striped table-bordered " style="width:100%" id="MonthDataTable" data-filter>
             <div style="width: 300px;" class="float-left mb-2" >
             <div class="input-group"><span class="input-group-text"><i class="fa fa-search"></i></span><input id="rechercher_p" class="form-control" type="text"  required placeholder="Region" onkeyup="Rechercher_region()" /></div>
+            <div id="toolbar" class="mb-3 mt-3 float-left mb-2">
+                <a href="/export_mensuel" class="btn btn-primary float-right mb-3">Export</a>
+               </div>
             </div>
             <thead>
                 <tr>
                     <th colspan='4'> </th>
-                    <th colspan='2'>Cout Globale initial total</th>
+                    <th colspan='2'>Cout Globale initial</th>
                     <th colspan='2'>Prévision de l'année</th>
                     <th colspan='2'>Prévision Mensuel Cumulé </th>
                     <th colspan='2'>Prévision Mensuel</th>
@@ -49,6 +52,7 @@
                     <th colspan='1'></th>
                 </tr>
                 <tr>
+                    <th>id</th>
                     <th>Mois</th>
                     <th>Region </th>
                     <th>Cpte </th>
@@ -75,6 +79,7 @@
             <tbody>
               {% for Men in Mensuel %}
                     <tr name="Mensuel_row">
+                        <td>{{Men.Realisation_mensuelle_id}}</td>
                         <td>{{Men.Mois_real}}</td>
                         <td>{{Men.Project.Perimetre.region}}</td>                 
                         <td>{{Men.Project.Compte_Analytique}}</td>
@@ -147,8 +152,14 @@
 
         $(document).ready(function() {
         $('#MonthDataTable').DataTable({
+            columnDefs: [
+            { targets: [0],
+            className: "hide_column"
+            },
+            ],
+            order: [[0]],
             dom: 'Bfrtip',
-            buttons: [ 'copy','excel'],
+            buttons: [],
             "scrollX": true,
             pageLength: 5,
             "aLengthMenu": [
@@ -174,4 +185,9 @@
             },
         });});
     </script>
+    <style>
+        .hide_column {
+            display : none;
+        }
+    </style>
     {% endblock %}
