@@ -8,9 +8,21 @@
 <form method="post" action="">
     {% csrf_token %}
     <h1>Êtes-vous sûr de vouloir supprimer ?</h1><br>
-    <input class="btn btn-danger" type="submit" value="Oui" />
+    <input class="btn btn-danger" type="submit" value="Oui" id="bt" />
     <a href="##"><div class="btn btn-primary"  value="Input Button" onclick="history.go(-1); return false;">Annuler</div></a>
 </form>
 </div>
+<style>
+body, 
+html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    background: #fff !important;
+}
+#bt {
+    background:#32013 !important;
+}
+</style>
 
 {% endblock %}

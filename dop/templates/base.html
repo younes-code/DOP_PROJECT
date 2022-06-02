@@ -25,6 +25,7 @@
     </style>
     <title>{% block title %} {% endblock title %}</title>
 </head>
+
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -90,7 +91,21 @@
 <script type="text/javascript" src=https://cdn.datatables.net/buttons/2.2.2/js/buttons.print.min.js></script>
 </body>
 {% else %}
-<a href="{% url 'login' %}" class=”button-link”>login</a> 
+<a href="{% url 'logoutUser' %}" class=”button-link”>login</a> 
 {% endif %}
 
 </html>
+<style>
+    body,
+    html {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        background: #F99245;
+    }
+    .table {
+        background: #00C7E4;
+    }
+
+
+</style>    

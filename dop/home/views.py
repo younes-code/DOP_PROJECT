@@ -3,10 +3,9 @@ from genericpath import exists
 from multiprocessing import context
 from pickle import NONE
 from urllib import response
-from click import password_option
 from django.shortcuts import redirect, render
 from django.http import HttpResponsePermanentRedirect,HttpResponse, HttpResponseRedirect
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login ,logout
 from django.contrib import messages
 from django.db.models import Q
 #from django.contrib.auth.forms import UserCreationForm
@@ -14,6 +13,30 @@ from django.db.models import Q
 from .forms import *
 from .models import *
 
+def loginPage(request):
+	if request.user.is_authenticated:
+		return redirect('home')
+	else:
+		if request.method == 'POST':
+			username = request.POST.get('username')
+			password =request.POST.get('password')
+
+			user = authenticate(request, username=username, password=password)# check if they exist
+
+			if user is not None:
+				login(request, user)
+				return redirect('home')
+			else:
+				messages.info(request, "Mot de passe ou nom d'utilisateur incorrect")
+
+		context = {}
+		return render(request, 'authenticate/login.html', context)
+
+def logoutUser(request):
+	logout(request)
+	return redirect('login')
+
+"""
 def loginuser(request):
       if request.method=='POST':
             username=request.POST['username']
@@ -28,7 +51,7 @@ def loginuser(request):
 
       else:
             return render (request,'authenticate/login.html',{})
-
+"""
 ####################################### functions Caluclations #######################################
 
 def Taux_real(p,r):

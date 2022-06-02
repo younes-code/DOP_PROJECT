@@ -48,7 +48,8 @@ urlpatterns = [
       path('add_prevision', views.add_prevision, name='add_prevision'),
 
       path('add_monthly', views.add_monthly, name='add_monthly'),
-      path('loginuser',views.loginuser,name='loginuser'),
-      path('accounts/',include('django.contrib.auth.urls')),
+      path('login',views.loginPage,name='login'),
+      path('logout',views.logoutUser,name='logout'),
+      #path('accounts/',include('django.contrib.auth.urls')),
       path('',TemplateView.as_view(template_name='home.html'), name='home')     
       ]
