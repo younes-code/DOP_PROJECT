@@ -4,26 +4,37 @@
 {% block title %}Home{% endblock %}
 
 {% block content %}
-<div class="container mt-3 mb-2">
+{% if messages %}
+{% for message in messages %}
+  <div class="alert {{ message.tags }} alert-dismissible shadow fade show" role="alert">
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+      </button>
+      {{ message | safe }}
+  </div>
+{% endfor %}
+{% endif %}
+
     <div id="carouselExampleIndicators" class="carousel slide mx-auto" data-ride="carousel">
         <ol class="carousel-indicators">
             <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
             <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
             <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
         </ol>
-        <div class="carousel-inner" role="listbox" style="max-width:1500px; max-height:500px !important;">
+        <div class="carousel-inner" role="listbox" style="max-height:650px !important;">
             <div class="carousel-item active">
                 <img class="d-block w-100" src="{% static 'img/unsplash2.jpg'%}" alt="First slide">
             </div>
+            
             <div class="carousel-caption d-none d-md-block ">
                 <h1>Bienvenu {{user.username}}</h1>
                 <p>Application web de departement DP</p>
             </div>
             <div class="carousel-item">
-                <img class="d-block w-100" src="{% static 'img/oil-industries.jpg'%}" alt="First slide">
+                <img class="d-block w-100" src="{% static 'img/about-home2.jpg'%}" alt="First slide">
             </div>
             <div class="carousel-item">
-                <img class="d-block w-100" src="{% static 'img/about-home2.jpg'%}" alt="First slide">
+                <img class="d-block w-100" src="{% static 'img/oil-industries.jpg'%}" alt="First slide">
             </div>
         </div>
         <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
@@ -35,7 +46,7 @@
             <span class="sr-only">Next</span>
         </a>
     </div>
-    <div class="container my-3 style=max-width:1500px; max-height:500px !important;">
+    <div class="cards my-3 style=max-width:1500px; max-height:500px !important;">
 
         <div class="row mx-auto my-2">
             <div class="col-sm-6">
@@ -47,7 +58,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-sm-6">
+            <div class="col-sm-6 mb-3">
                 <div class="card" style="width:30rem;">
                     <div class="card-body">
                         <h5 class="card-title">Rapport Mensuel</h5>
@@ -56,16 +67,8 @@
                     </div>
                 </div>
             </div>
-            <div class="col-sm-6 mt-3">
-                <div class="card" style="width:30rem;">
-                    <div class="card-body">
-                        <h5 class="card-title">Récapitulatif détaillé</h5>
-                        <p class="card-text">accéder aux étas récapitulatifs détaillés des projets.</p>
-                        <a href="/recap" class="btn btn-primary">Consulter</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-6 mt-3">
+            {% if user.is_superuser %}
+            <div class="col-sm-6 mt-3 ">
                 <div class="card" style="width:30rem;">
                     <div class="card-body">
                         <h5 class="card-title">Récapitulatif géneral par familles</h5>
@@ -83,7 +86,7 @@
                     </div>
                 </div>
             </div>  
-            <div class="col-sm-6 mt-3 mb-3">
+            <div class="col-sm-6 mt-3">
                 <div class="card" style="width:30rem;">
                     <div class="card-body">
                         <h5 class="card-title">Récapitulatif géneral par activités</h5>
@@ -91,13 +94,23 @@
                         <a href="/recap_act" class="btn btn-primary">Consulter</a>
                     </div>
                 </div>
-            </div>                   
+            </div>
+            <div class="col-sm-6 mt-3 pb-3">
+                <div class="card" style="width:30rem;">
+                    <div class="card-body">
+                        <h5 class="card-title">Récapitulatif détaillé</h5>
+                        <p class="card-text">accéder aux étas récapitulatifs détaillés des projets.</p>
+                        <a href="/recap" class="btn btn-primary">Consulter</a>
+                    </div>
+                </div>
+            </div>                  
         </div>
 
+        {% endif %}
+
     </div>
-</div>
+
 <style>
-    body,
     html {
         font-family: ;
         margin: 0;
@@ -108,5 +121,41 @@
     .table {
         background: #B0E0E6;
     }
+    
+
+
+
+    body {
+        position: relative;
+        height: 100%;
+      }
+      .carousel{
+        position: relative;
+        height: 100%;
+        width: 100%;
+      }
+      /*<!-- Carousel -->*/
+      
+      .carousel-inner {
+        height: fit-content;
+      }
+      /*<!-- Carousel Text -->*/
+      .carousel-caption{
+        bottom: auto;
+        position:absolute;
+        top:80%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+        z-index: 100;
+      }
+
+      cards {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        width: 40%;
+      }
+
+    
 </style>
 {% endblock %}

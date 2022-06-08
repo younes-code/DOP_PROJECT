@@ -36,22 +36,6 @@ def logoutUser(request):
 	logout(request)
 	return redirect('login')
 
-"""
-def loginuser(request):
-      if request.method=='POST':
-            username=request.POST['username']
-            password=request.POST['password']
-            user=authenticate(request,username=username,password=password)
-            if user is not None:
-                  login(request,user)
-                  return redirect('home')
-            else:
-                  messages.success(request,("Error try again"))   
-                  return redirect('login')
-
-      else:
-            return render (request,'authenticate/login.html',{})
-"""
 ####################################### functions Caluclations #######################################
 
 def Taux_real(p,r):
@@ -60,13 +44,8 @@ def Taux_real(p,r):
       else: 
             return (r*100)/p
 
-def taux_real_cum():
 
-      return
 
-def taux_real_ann():
-
-      return
       
 def CGI(Realisation_cum,Realisation_S1,Prevision_S2,Prevision_n,Prevision_n1,Prevision_n2,Prevision_n3,Prevision_n4):
       return Realisation_cum+Realisation_S1+Prevision_S2+Prevision_n+Prevision_n1+Prevision_n2+Prevision_n3+Prevision_n4
@@ -105,12 +84,15 @@ def recap(request):
             obj=Recap.objects.filter(PMT=year)
             return render(request,'recap.html',{'recaps':obj,'form1':search_form,'form2':search_form_region,'my_year':my_year})
 
-      i = Acces.objects.get(user=request.user) 
-      p = Perimetre.objects.filter(region=i.region)
-      year=datetime.date.today().year+0
-      obj=Recap.objects.filter(Perimetre=p[0],PMT=year)
-      return render(request,'PMT.html',{'recaps':obj,'form1':search_form,'form2':search_form_region,'my_year':my_year})
-
+      i = Acces.objects.filter(user=request.user)
+      if i.exists():
+            i = Acces.objects.get(user=request.user)
+            p = Perimetre.objects.filter(region=i.region)
+            year=datetime.date.today().year+0
+            obj=Recap.objects.filter(Perimetre=p[0],PMT=year)
+            return render(request,'PMT.html',{'recaps':obj,'form1':search_form,'form2':search_form_region,'my_year':my_year})
+      else:
+            return render(request,'404.html')
 def export_region(request):
       my_year=int(datetime.date.today().year)
       user=request.user
@@ -134,11 +116,15 @@ def recap_reg(request):
             obj=Recap_region.objects.filter(PMT=year)
             return render(request,'Recap_reg.html',{'Recap_regs':obj,'form1':search_form,'my_year':my_year})
 
-      i = Acces.objects.get(user=request.user) 
-      p = Perimetre.objects.filter(region=i.region)
-      year=datetime.date.today().year+0
-      obj=Recap_region.objects.filter(Perimetre=p[0],PMT=year)
-      return render(request,'Recap_reg.html',{'Recap_regs':obj,'form1':search_form,'my_year':my_year})
+      i = Acces.objects.filter(user=request.user)
+      if i.exists():
+            i = Acces.objects.get(user=request.user) 
+            p = Perimetre.objects.filter(region=i.region)
+            year=datetime.date.today().year+0
+            obj=Recap_region.objects.filter(Perimetre=p[0],PMT=year)
+            return render(request,'Recap_reg.html',{'Recap_regs':obj,'form1':search_form,'my_year':my_year})
+      else:
+            return render(request,'404.html')
 
 def export_famille(request):
       my_year=int(datetime.date.today().year)
@@ -162,12 +148,15 @@ def recap_fam(request):
             obj=Recap_famille.objects.filter(PMT=year)
             return render(request,'recap_fam.html',{'recap_fams':obj,'form1':search_form,'form2':search_form_region,'my_year':my_year})
 
-      i = Acces.objects.get(user=request.user) 
-      p = Perimetre.objects.filter(region=i.region)
-      year=datetime.date.today().year+0
-      obj=Recap_famille.objects.filter(Perimetre=p[0],PMT=year)
-      return render(request,'recap_fam.html',{'recap_fams':obj,'form1':search_form,'form2':search_form_region,'my_year':my_year})
-
+      i = Acces.objects.filter(user=request.user)
+      if i.exists():
+            i = Acces.objects.get(user=request.user) 
+            p = Perimetre.objects.filter(region=i.region)
+            year=datetime.date.today().year+0
+            obj=Recap_famille.objects.filter(Perimetre=p[0],PMT=year)
+            return render(request,'recap_fam.html',{'recap_fams':obj,'form1':search_form,'form2':search_form_region,'my_year':my_year})
+      else:
+            return render(request,'404.html')
 def export_activite(request):
       my_year=int(datetime.date.today().year)
       user=request.user
@@ -191,12 +180,15 @@ def recap_act(request):
             obj=Recap_activite.objects.filter(PMT=year)
             return render(request,'recap_act.html',{'recap_acts':obj,'form1':search_form,'my_year':my_year})
 
-      i = Acces.objects.get(user=request.user) 
-      p = Perimetre.objects.filter(region=i.region)
-      year=datetime.date.today().year+0
-      obj=Recap_activite.objects.filter(Perimetre=p[0],PMT=year)
-      return render(request,'PMT.html',{'recap_acts':obj,'form1':search_form,'my_year':my_year})
-      
+      i = Acces.objects.filter(user=request.user)
+      if i.exists():
+            i = Acces.objects.get(user=request.user)
+            p = Perimetre.objects.filter(region=i.region)
+            year=datetime.date.today().year+0
+            obj=Recap_activite.objects.filter(Perimetre=p[0],PMT=year)
+            return render(request,'PMT.html',{'recap_acts':obj,'form1':search_form,'my_year':my_year})
+      else:
+            return render(request,'404.html')
       
 def search_project(request): #search projects by year for PMT
       form = search_form(request.POST)
@@ -273,12 +265,22 @@ def PMT(request):
             obj=Project.objects.filter(PMT=year).order_by()
             stm=Stimulation.objects.filter(PMT=year).order_by()
             return render(request,'PMT.html',{'projects':obj,'stimulations':stm,'form1':search_form,'my_year':my_year})
-      i = Acces.objects.get(user=request.user) 
-      p = Perimetre.objects.filter(region=i.region)
-      year=datetime.date.today().year+0
-      obj=Project.objects.filter(Perimetre=p[0],PMT=year)
-      stm=Stimulation.objects.filter(Perimetre=p[0],PMT=year).order_by()
-      return render(request,'PMT.html',{'projects':obj,'stimulations':stm,'form1':search_form,'my_year':my_year})
+      i = Acces.objects.filter(user=request.user)
+      if i.exists():
+            i = Acces.objects.get(user=request.user) 
+            p = Perimetre.objects.filter(region=i.region)
+            year=datetime.date.today().year+0
+            print(p)
+            if not p:
+                  messages.info(request,"La région auquel vous avez accès n'a pas encore de périmètre")
+                  return redirect('/')  
+            else:      
+                  obj=Project.objects.filter(Perimetre=p[0],PMT=year)
+                  stm=Stimulation.objects.filter(Perimetre=p[0],PMT=year).order_by()
+                  return render(request,'PMT.html',{'projects':obj,'stimulations':stm,'form1':search_form,'my_year':my_year})
+      else:
+            return render(request,'404.html')
+ 
 
 def add_project(request):
       submitted=False
@@ -742,14 +744,21 @@ def Mensuel(request):
             return render(request,'Mensuel.html',{'Mensuel':obj,'form1':search_form,'form2':search_form_region,
             'form3':search_month_form})
 
-      i = Acces.objects.get(user=request.user) 
-      p = Perimetre.objects.filter(region=i.region)
-      year=datetime.date.today().year+0
-      obj1=Project.objects.filter(Perimetre=p[0],PMT=year)
-      obj=Realisation_mensuelle.objects.filter(Project__in=obj1)
-      return render(request,'Mensuel.html',{'Mensuel':obj,'form1':search_form,'form2':search_form_region,
-      'form3':search_month_form}) 
-
+      i = Acces.objects.filter(user=request.user)
+      if i.exists():
+            i = Acces.objects.get(user=request.user)
+            p = Perimetre.objects.filter(region=i.region)
+            year=datetime.date.today().year+0
+            if not p:
+                  messages.info(request,"La région auquel vous avez accès n'a pas encore de périmètre")
+                  return redirect('/')  
+            else:      
+                  obj1=Project.objects.filter(Perimetre=p[0],PMT=year)
+                  obj=Realisation_mensuelle.objects.filter(Project__in=obj1)
+                  return render(request,'Mensuel.html',{'Mensuel':obj,'form1':search_form,'form2':search_form_region,
+                  'form3':search_month_form}) 
+      else:
+            return render(request,"404.html")
 def mensuel_form(request):
       context= {
             "form":add_realisation_form
@@ -815,18 +824,50 @@ def export_prevision(request):
       return render(request,'export_prevision.html',context)
 
 def Prevision(request):
-      obj=Prévision_mensuelle.objects.values('Project').distinct()
-      obj1 = Prévision_mensuelle.objects.all()
-
-      stm=Prévision_mensuelle_stimulation.objects.values('Stimulation').distinct()
-      stm1 = Prévision_mensuelle_stimulation.objects.all()
-
-      context={ "Prevision":obj,
+      user=request.user
+      if user.is_staff:
+            obj=Prévision_mensuelle.objects.values('Project').distinct()
+            obj1 = Prévision_mensuelle.objects.all()            
+            stm=Prévision_mensuelle_stimulation.objects.values('Stimulation').distinct()
+            stm1 = Prévision_mensuelle_stimulation.objects.all()
+            context={ "Prevision":obj,
             "Prevision1":obj1,
             "Prevision_stm":stm,
             "Prevision_stm1":stm1,
              }
-      return render(request,'Prevision.html',context)
+            return render(request,'Prevision.html',context)
+
+      i = Acces.objects.filter(user=request.user)
+      if i.exists():
+            i = Acces.objects.get(user=request.user)
+
+    
+            p = Perimetre.objects.filter(region=i.region)
+            year=datetime.date.today().year+0            
+            if not p:
+                  messages.info(request,"La région auquel vous avez accès n'a pas encore de périmètre")
+                  return redirect('/')   
+            else:  
+                  prj=Project.objects.filter(Perimetre=p[0],PMT=year)#getting the projets that the user can access
+                  per=Prévision_mensuelle.objects.filter(Project__in=prj)#getting the prevision of those project
+
+                  obj=per.values('Project').distinct()#getting distinct projects for the first loop 
+                  obj1 = Prévision_mensuelle.objects.all()#all previsions (12) for the seconde loop
+                  
+                  ############ the same work for the stimulations #############
+                  simulation=Stimulation.objects.filter(Perimetre=p[0],PMT=year)
+                  stms=Prévision_mensuelle_stimulation.objects.filter(Stimulation__in=simulation)
+                  stm=stms.values('Stimulation').distinct()
+                  stm1 = Prévision_mensuelle_stimulation.objects.all()
+                  
+                  context={ "Prevision":obj,
+                        "Prevision1":obj1,
+                        "Prevision_stm":stm,
+                        "Prevision_stm1":stm1,
+                        }
+                  return render(request,'Prevision.html',context)
+      else:
+            return render(request,'404.html')
 
 
 def prevision_form(request):
