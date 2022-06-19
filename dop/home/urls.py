@@ -49,7 +49,7 @@ urlpatterns = [
 
       path('add_monthly', views.add_monthly, name='add_monthly'),
       path('login',views.loginPage,name='login'),
-      path('logout',views.logoutUser,name='logout'),
+      path('logout',views.logoutUser,name='logoutUser'),
       #path('accounts/',include('django.contrib.auth.urls')),
       path('',TemplateView.as_view(template_name='home.html'), name='home')     
       ]

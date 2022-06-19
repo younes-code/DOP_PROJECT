@@ -1,3 +1,4 @@
+from cmath import log
 from email import message
 from genericpath import exists
 from multiprocessing import context
@@ -6,6 +7,7 @@ from urllib import response
 from django.shortcuts import redirect, render
 from django.http import HttpResponsePermanentRedirect,HttpResponse, HttpResponseRedirect
 from django.contrib.auth import authenticate, login ,logout
+from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.db.models import Q
 #from django.contrib.auth.forms import UserCreationForm
@@ -62,6 +64,7 @@ def Reste_a_realiser (Prevision_n1,Prevision_n2,Prevision_n3,Prevision_n4):
 
 # Create your views here.
 ########################################## Models views ##############################################
+@login_required(login_url='login')
 def export_recap(request):
       my_year=int(datetime.date.today().year)
       user=request.user
@@ -76,6 +79,7 @@ def export_recap(request):
       obj=Recap.objects.filter(Perimetre=p[0],PMT=year)
       return render(request,'export_recap.html',{'recaps':obj,'form1':search_form,'form2':search_form_region,'my_year':my_year})
 
+@login_required(login_url='login')
 def recap(request):
       my_year=int(datetime.date.today().year)
       user=request.user
@@ -93,6 +97,8 @@ def recap(request):
             return render(request,'PMT.html',{'recaps':obj,'form1':search_form,'form2':search_form_region,'my_year':my_year})
       else:
             return render(request,'404.html')
+
+@login_required(login_url='login')
 def export_region(request):
       my_year=int(datetime.date.today().year)
       user=request.user
@@ -107,7 +113,7 @@ def export_region(request):
       obj=Recap_region.objects.filter(Perimetre=p[0],PMT=year)
       return render(request,'export_region.html',{'Recap_regs':obj,'form1':search_form,'my_year':my_year})
 
-
+@login_required(login_url='login')
 def recap_reg(request):
       my_year=int(datetime.date.today().year)
       user=request.user
@@ -126,6 +132,7 @@ def recap_reg(request):
       else:
             return render(request,'404.html')
 
+@login_required(login_url='login')
 def export_famille(request):
       my_year=int(datetime.date.today().year)
       user=request.user
@@ -140,6 +147,7 @@ def export_famille(request):
       obj=Recap_famille.objects.filter(Perimetre=p[0],PMT=year)
       return render(request,'export_famille.html',{'recap_fams':obj,'form1':search_form,'form2':search_form_region,'my_year':my_year})
 
+@login_required(login_url='login')
 def recap_fam(request):
       my_year=int(datetime.date.today().year)
       user=request.user
@@ -171,7 +179,7 @@ def export_activite(request):
       obj=Recap_activite.objects.filter(Perimetre=p[0],PMT=year)
       return render(request,'export_activite.html',{'recap_acts':obj,'form1':search_form,'my_year':my_year})
 
-
+@login_required(login_url='login')
 def recap_act(request):
       my_year=int(datetime.date.today().year)
       user=request.user
@@ -215,8 +223,9 @@ def search_month(request): #search monthly reports by month
             obj=Realisation_mensuelle.objects.filter(Perimetre=p[0],Mois_real=form.cleaned_data["Month"])
             return render(request,'Mensuel.html',{'Mensuel':obj,'form3':search_month_form}) 
       
-      return render(request,'Mensuel.html')           
-          
+      return render(request,'Mensuel.html')    
+
+@login_required(login_url='login')          
 def search_project_region(request): #search project by region for recap
       form = search_form_region(request.POST)
       if form.is_valid():
@@ -233,7 +242,7 @@ def search_project_region(request): #search project by region for recap
 
 
                              
-
+@login_required(login_url='login')
 def project_form(request):
       my_year=int(datetime.date.today().year)
       context= {
@@ -242,6 +251,7 @@ def project_form(request):
       }
       return render(request,'project_form.html',context)
 
+@login_required(login_url='login')
 def export_pmt(request):
       my_year=int(datetime.date.today().year)
       user=request.user
@@ -257,6 +267,7 @@ def export_pmt(request):
       stm=Stimulation.objects.filter(Perimetre=p[0],PMT=year).order_by()
       return render(request,'export_pmt.html',{'projects':obj,'stimulations':stm,'form1':search_form,'my_year':my_year})
 
+@login_required(login_url='login')
 def PMT(request):
       my_year=int(datetime.date.today().year)
       user=request.user
@@ -281,7 +292,7 @@ def PMT(request):
       else:
             return render(request,'404.html')
  
-
+@login_required(login_url='login')
 def add_project(request):
       submitted=False
       if request.method=="POST":
@@ -720,6 +731,7 @@ def add_project(request):
                   submitted=True
       return render(request,'PMT.html',{'form':form,'submitted':submitted})      
 
+@login_required(login_url='login')
 def export_mensuel(request):
       user=request.user
       if user.is_staff:
@@ -736,6 +748,7 @@ def export_mensuel(request):
       return render(request,'export_mensuel.html',{'Mensuel':obj,'form1':search_form,'form2':search_form_region,
       'form3':search_month_form}) 
 
+@login_required(login_url='login')
 def Mensuel(request):
       user=request.user
       if user.is_staff:
@@ -759,6 +772,8 @@ def Mensuel(request):
                   'form3':search_month_form}) 
       else:
             return render(request,"404.html")
+
+@login_required(login_url='login')
 def mensuel_form(request):
       context= {
             "form":add_realisation_form
@@ -766,7 +781,7 @@ def mensuel_form(request):
       return render(request,'mensuel_form.html',context)
 
   
-
+@login_required(login_url='login')
 def add_mensuel(request):
       form=add_realisation_form(request.POST)
       if form.is_valid():
@@ -808,7 +823,7 @@ def add_mensuel(request):
                   submitted=True
       return render(request,'Mensuel.html',{'form':form,'submitted':submitted})   
 
-
+@login_required(login_url='login')
 def export_prevision(request):
       obj=Prévision_mensuelle.objects.values('Project').distinct()
       obj1 = Prévision_mensuelle.objects.all()
@@ -823,6 +838,7 @@ def export_prevision(request):
              }
       return render(request,'export_prevision.html',context)
 
+@login_required(login_url='login')
 def Prevision(request):
       user=request.user
       if user.is_staff:
@@ -869,14 +885,14 @@ def Prevision(request):
       else:
             return render(request,'404.html')
 
-
+@login_required(login_url='login')
 def prevision_form(request):
       context= {
             "form":add_prevision_form
       }
       return render(request,'prevision_form.html',context)
 
-
+@login_required(login_url='login')
 def add_prevision(request):
       submitted=False
       form=add_prevision_form(request.POST)
@@ -1261,13 +1277,15 @@ def add_prevision(request):
 def admin_home(request):
       return render(request,'admin_home.html')
 
-
+@login_required(login_url='login')
 def home(request):
       return render(request,'home.html')
 
+@login_required(login_url='login')
 def add_monthly(request):
       return render(request,'add_monthly.html')
 
+@login_required(login_url='login')
 def update_project (request,pk):
       project=Project.objects.filter(id=pk)
       if project.exists():
@@ -1280,8 +1298,7 @@ def update_project (request,pk):
             if request.method=="POST":
                   stimulation=Stimulation.objects.get(stimulation_id=pk)
 
-
-
+@login_required(login_url='login')
 def delete_realisation (request,pk):
       realisation=Realisation_mensuelle.objects.filter(Realisation_mensuelle_id=pk)
       if realisation.exists():
@@ -1292,6 +1309,7 @@ def delete_realisation (request,pk):
                   return redirect('Mensuel')
             return render(request,'delete.html')
 
+@login_required(login_url='login')
 def delete_project (request,pk):
       project=Project.objects.filter(id=pk)
       if project.exists():
