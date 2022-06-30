@@ -17,7 +17,7 @@
 
 <div class="div" style="margin-left:2%;margin-right:2%;">
     <br>
-    <h1>Rapport PMT</h1>
+    <h2>Rapport PMT</h2>
     <form action="{% url 'search_project' %}" method="post" float-right class="float-right">
         {% csrf_token %}
         <div class="row g-3 align-items-center">
@@ -132,7 +132,20 @@
                 <th>Prévision {{ my_year |add:"+3" }} Don Devise</th>
                 <th>Prévision {{ my_year |add:"+4" }} Total</th>
                 <th>Prévision {{ my_year |add:"+4" }} Don Devise</th>
-                <th>Point de situation</th>
+                <th>                
+                    <p>
+                        <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                          Link with href
+                        </a>
+
+                    </p>
+                      <div class="collapse" id="collapseExample">
+                        <div class="card card-body">
+                          Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
+                        </div>
+                      </div>
+
+                </th>
                 {% if user.is_superuser %}
                 <th></th>
                 {% endif %}
@@ -217,7 +230,20 @@
                 <td>{{Project.Prevision_n3_devise|floatformat:"0"|intcomma}}</td>
                 <td>{{Project.Prevision_n4_total|floatformat:"0"|intcomma}}</td>
                 <td>{{Project.Prevision_n4_devise|floatformat:"0"|intcomma}}</td>
-                <td>{{Project.Point_situation}}</td>
+                <td style="word-wrap: break-word;min-width: 160px;max-width: 160px;">
+                    <p>
+                        <a class="btn btn-outline" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                            Afficher 
+                        </a>
+                    </p>
+                      <div class="collapse" id="collapseExample">
+                        <div class="card card-body">
+                            {{Project.Point_situation}}                        
+                        </div>
+                      </div>
+     
+                </td> 
+
                 {% if user.is_superuser %}
                 <td>
                     <a href="{% url 'delete_project' Project.id %}" class="btn btn-outline-danger btn-sm ">
@@ -246,6 +272,7 @@
 <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
 <script>
+
 
     function Rechercher_region() {
 		  
