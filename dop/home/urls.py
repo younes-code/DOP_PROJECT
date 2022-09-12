@@ -14,10 +14,9 @@ admin.site.index_title=""
 
 urlpatterns = [
       path('', views.home, name='home'),
-      path('admin_home', views.admin_home, name='admin_home'),
       path('delete_project/<str:pk>/', views.delete_project, name='delete_project'),
       path('delete_realisation/<str:pk>/', views.delete_realisation, name='delete_realisation'),
-      path('update_project/<str:pk>/', views.update_project, name='update_project'),
+
       path('search_project', views.search_project, name='search_project'),
       path('search_project_region', views.search_project_region, name='search_project_region'),
       path('PMT', views.PMT, name='PMT'),
@@ -46,8 +45,8 @@ urlpatterns = [
       path('export_prevision', views.export_prevision, name='export_prevision'),
       path('prevision_form', views.prevision_form, name='prevision_form'),
       path('add_prevision', views.add_prevision, name='add_prevision'),
+      path('update_previsions_form', views.update_previsions_form, name='update_previsions_form'),
 
-      path('add_monthly', views.add_monthly, name='add_monthly'),
       path('login',views.loginPage,name='login'),
       path('logout',views.logoutUser,name='logoutUser'),
       #path('accounts/',include('django.contrib.auth.urls')),

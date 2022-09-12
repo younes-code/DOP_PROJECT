@@ -1,0 +1,191 @@
+{% extends 'base.html' %} 
+{% load static %} 
+{% block title %}Projet form{% endblock %}
+
+{% block content %}
+{% if messages %}
+{% for message in messages %}
+  <div class="alert {{ message.tags }} alert-dismissible shadow fade show" role="alert">
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+      </button>
+      {{ message | safe }}
+  </div>
+{% endfor %}
+{% endif %}
+<div class="container">
+    <br>
+    <h2>Modifier un Projet</h2>
+    <br>
+
+    {% if submitted %} 
+        Monthly Report added successfuly !! 
+    {% else %}
+    <div class="container">
+
+          <div class="col-md-6 col-md-offset-3">
+            <div class="well well-sm">
+              <form class="form-horizontal" action="{% url 'update_project' %}" method="post">
+                {% csrf_token %}
+                <div class="mb-3">
+                  <label class="form-label">Compte Analytique</label>
+                  {{form.Compte_Analytique }}
+                  <div  class="form-text"></div>
+                </div>
+
+                <div class="mb-3">
+                  <label class="form-label">Libellé du projet</label>
+                  {{form.Libelles }}
+                </div>
+
+                <div class="mb-3">
+                  <label class="form-label">Structure gerante</label>
+                    {{form.Structure_gerante }}
+                  </select>
+                </div>
+                <div class="mb-3">
+                  <label class="form-label">Perimetre</label>
+                    {{form.Perimetre }}
+                  </select>
+                </div>
+
+                <div class="mb-3">
+                  <label class="form-label">Champ</label>
+                    {{form.Champ }}
+                  </select>
+                </div>
+
+                <div class="mb-3">
+                  <label class="form-label">Famille du projet</label>
+                    {{form.Famille }}
+                  </select>
+                </div>
+
+                <div class="mb-3">
+                  <label class="form-label">Type de projet</label>
+                    {{form.Type }}
+                  </select>
+                </div>
+
+                <div class="mb-3">
+                  <label class="form-label">Fiscalite</label>
+                    {{form.Fiscalite }}
+                  </select>
+                </div>
+
+                <label class="form-label">Realisation cumulée</label>
+                <div class="row">
+                  <div class="col">
+                    {{form.Realisation_cum_total }}
+                  </div>
+                  <div class="col">
+                    {{form.Realisation_cum_devise }}
+                  </div>
+                </div>
+                <br> 
+
+                <label class="form-label">Realisation S1</label>
+                <div class="row">
+                  <div class="col">
+                    {{form.Realisation_S1_total }}
+                  </div>
+                  <div class="col">
+                    {{form.Realisation_S1_devise }}
+                  </div>
+                </div>
+                <br> 
+
+                <label class="form-label">Prévision S2</label>
+                <div class="row">
+                  <div class="col">
+                    {{form.Prevision_S2_total }}
+                  </div>
+                  <div class="col">
+                    {{form.Prevision_S2_devise }}
+                  </div>
+                </div>
+                <br>
+
+                <label class="form-label">Prévision {{ my_year |add:"0" }}</label>
+                <div class="row">
+                  <div class="col">
+                    {{form.Prevision_n_total }}
+                  </div>
+                  <div class="col">
+                    {{form.Prevision_n_devise }}
+                  </div>
+                </div>
+                <br>
+
+                <label class="form-label">Prévision {{ my_year |add:"1" }}</label>
+                <div class="row">
+                  <div class="col">
+                    {{form.Prevision_n1_total }}
+                  </div>
+                  <div class="col">
+                    {{form.Prevision_n1_devise }}
+                  </div>
+                </div>
+                <br>
+                
+                <label class="form-label">Prévision {{ my_year |add:"2" }}</label>
+                <div class="row">
+                  <div class="col">
+                    {{form.Prevision_n2_total }}
+                  </div>
+                  <div class="col">
+                    {{form.Prevision_n2_devise }}
+                  </div>
+                </div>
+                <br> 
+
+                <label class="form-label">Prévision {{ my_year |add:"3" }}</label>
+                <div class="row">
+                  <div class="col">
+                    {{form.Prevision_n3_total }}
+                  </div>
+                  <div class="col">
+                    {{form.Prevision_n3_devise }}
+                  </div>
+                </div>
+                <br> 
+
+                <label class="form-label">Prevision {{ my_year |add:"4" }} devise</label>
+                <div class="row">
+                  <div class="col">
+                    {{form.Prevision_n4_total }}
+                  </div>
+                  <div class="col">
+                    {{form.Prevision_n4_devise }}
+                  </div>
+                </div>
+                <br> 
+                <div class="mb-3">
+                  <label class="form-label">Point de situation</label>
+                    {{form.Point_situation }}
+                  </select>
+                </div>
+                <div class="form-check">
+                  <label class="form-check-label">
+                    Veuillez préciser s'il s'agit d'une simulation
+                  </label>
+                  {{form.Project_puit }}
+                </div>
+                <br>
+              <fieldset>
+    
+                <!-- Form actions -->
+                <div class="form-group">
+                  <div class="col-md-12 text-right">
+                    <button type="submit" class="btn btn-secondary">Modifier</button>
+                  </div>
+                </div>
+              </fieldset>
+              </form>
+            </div>
+          </div>
+    </div>
+    {% endif %} 
+</div>
+
+{% endblock %}

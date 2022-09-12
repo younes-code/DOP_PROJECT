@@ -228,6 +228,184 @@ def delete_project (request,pk):
                   return redirect('PMT')
             return render(request,'delete.html')
 
+
+#this delete functon is for update projets it deletes the project without deleting it previsions 
+@login_required(login_url='login')
+def delete_project_modif (request,pk):
+      project=Project.objects.filter(id=pk)
+      if project.exists():
+            project=Project.objects.get(id=pk)
+            if request.method=="POST":
+                  
+                  r_reg = Recap_region.objects.get(PMT=datetime.date.today().year+0,region=project.Perimetre.region)
+                  r_reg.CGI_total= r_reg.CGI_total- project.Cout_Globale_initial_total
+                  r_reg.CGI_devise= r_reg.CGI_devise- project.Cout_Globale_initial_devise
+                  r_reg.Previson_de_cloture_total= r_reg.Previson_de_cloture_total- project.Previson_de_cloture_total
+                  r_reg.Previson_de_cloture_devise= r_reg.Previson_de_cloture_devise- project.Previson_de_cloture_devise                 
+                  r_reg.Reste_a_realiser_total= r_reg.Reste_a_realiser_total- project.Reste_a_realiser_total
+                  r_reg.Reste_a_realiser_devise= r_reg.Reste_a_realiser_devise- project.Reste_a_realiser_devise
+                  r_reg.Realisation_cum_total=r_reg.Realisation_cum_total-project.Realisation_cum_total
+                  r_reg.Realisation_cum_devise=r_reg.Realisation_cum_devise- project.Realisation_cum_devise
+                  r_reg.Realisation_S1_total=r_reg.Realisation_S1_total-project.Realisation_S1_total
+                  r_reg.Realisation_S1_devise=r_reg.Realisation_S1_devise-project.Realisation_S1_devise
+                  r_reg.Prevision_S2_total=r_reg.Prevision_S2_total-project.Prevision_S2_total
+                  r_reg.Prevision_S2_devise=r_reg.Prevision_S2_devise-project.Prevision_S2_devise
+                  r_reg.Prevision_n_total=r_reg.Prevision_n_total-project.Prevision_n_total
+                  r_reg.Prevision_n_devise=r_reg.Prevision_n_devise-project.Prevision_n_devise
+                  r_reg.Prevision_n1_total=r_reg.Prevision_n1_total-project.Prevision_n1_total
+                  r_reg.Prevision_n1_devise=r_reg.Prevision_n1_devise-project.Prevision_n1_devise
+                  r_reg.Prevision_n2_total=r_reg.Prevision_n2_total-project.Prevision_n2_total
+                  r_reg.Prevision_n2_devise=r_reg.Prevision_n2_devise-project.Prevision_n2_devise
+                  r_reg.Prevision_n3_total=r_reg.Prevision_n3_total-project.Prevision_n3_total
+                  r_reg.Prevision_n3_devise=r_reg.Prevision_n3_devise-project.Prevision_n3_devise
+                  r_reg.Prevision_n4_total=r_reg.Prevision_n4_total-project.Prevision_n4_total
+                  r_reg.Prevision_n4_devise=r_reg.Prevision_n4_devise-project.Prevision_n4_devise
+                  r_reg.save()
+
+                  r_fam = Recap_famille.objects.get(PMT=datetime.date.today().year+0,famille=project.Famille)
+                  r_fam.CGI_total= r_fam.CGI_total- project.Cout_Globale_initial_total
+                  r_fam.CGI_devise= r_fam.CGI_devise- project.Cout_Globale_initial_devise
+                  r_fam.Previson_de_cloture_total= r_fam.Previson_de_cloture_total- project.Previson_de_cloture_total
+                  r_fam.Previson_de_cloture_devise= r_fam.Previson_de_cloture_devise- project.Previson_de_cloture_devise        
+                  r_fam.Reste_a_realiser_total= r_fam.Reste_a_realiser_total- project.Reste_a_realiser_total
+                  r_fam.Reste_a_realiser_devise= r_fam.Reste_a_realiser_devise- project.Reste_a_realiser_devise             
+                  r_fam.Realisation_cum_total=r_fam.Realisation_cum_total-project.Realisation_cum_total
+                  r_fam.Realisation_cum_devise=r_fam.Realisation_cum_devise- project.Realisation_cum_devise
+                  r_fam.Realisation_S1_total=r_fam.Realisation_S1_total-project.Realisation_S1_total
+                  r_fam.Realisation_S1_devise=r_fam.Realisation_S1_devise-project.Realisation_S1_devise
+                  r_fam.Prevision_S2_total=r_fam.Prevision_S2_total-project.Prevision_S2_total
+                  r_fam.Prevision_S2_devise=r_fam.Prevision_S2_devise-project.Prevision_S2_devise
+                  r_fam.Prevision_n_total=r_fam.Prevision_n_total-project.Prevision_n_total
+                  r_fam.Prevision_n_devise=r_fam.Prevision_n_devise-project.Prevision_n_devise
+                  r_fam.Prevision_n1_total=r_fam.Prevision_n1_total-project.Prevision_n1_total
+                  r_fam.Prevision_n1_devise=r_fam.Prevision_n1_devise-project.Prevision_n1_devise
+                  r_fam.Prevision_n2_total=r_fam.Prevision_n2_total-project.Prevision_n2_total
+                  r_fam.Prevision_n2_devise=r_fam.Prevision_n2_devise-project.Prevision_n2_devise
+                  r_fam.Prevision_n3_total=r_fam.Prevision_n3_total-project.Prevision_n3_total
+                  r_fam.Prevision_n3_devise=r_fam.Prevision_n3_devise-project.Prevision_n3_devise
+                  r_fam.Prevision_n4_total=r_fam.Prevision_n4_total-project.Prevision_n4_total
+                  r_fam.Prevision_n4_devise=r_fam.Prevision_n4_devise-project.Prevision_n4_devise
+                  r_fam.save()
+                  if str(project.Perimetre.activite)=="Pétrole" or str(project.Perimetre.activite)=="Gaz":
+                        r_act = Recap_activite.objects.get(PMT=datetime.date.today().year+0,activite=project.Perimetre.activite)
+                        r_act.CGI_total= r_act.CGI_total- project.Cout_Globale_initial_total
+                        r_act.CGI_devise= r_act.CGI_devise- project.Cout_Globale_initial_devise
+                        r_act.Previson_de_cloture_total= r_act.Previson_de_cloture_total- project.Previson_de_cloture_total
+                        r_act.Previson_de_cloture_devise= r_act.Previson_de_cloture_devise- project.Previson_de_cloture_devise                       
+                        r_act.Reste_a_realiser_total= r_act.Reste_a_realiser_total- project.Reste_a_realiser_total
+                        r_act.Reste_a_realiser_devise= r_act.Reste_a_realiser_devise- project.Reste_a_realiser_devise                        
+                        r_act.Realisation_cum_total=r_act.Realisation_cum_total-project.Realisation_cum_total
+                        r_act.Realisation_cum_devise=r_act.Realisation_cum_devise- project.Realisation_cum_devise
+                        r_act.Realisation_S1_total=r_act.Realisation_S1_total-project.Realisation_S1_total
+                        r_act.Realisation_S1_devise=r_act.Realisation_S1_devise-project.Realisation_S1_devise
+                        r_act.Prevision_S2_total=r_act.Prevision_S2_total-project.Prevision_S2_total
+                        r_act.Prevision_S2_devise=r_act.Prevision_S2_devise-project.Prevision_S2_devise
+                        r_act.Prevision_n_total=r_act.Prevision_n_total-project.Prevision_n_total
+                        r_act.Prevision_n_devise=r_act.Prevision_n_devise-project.Prevision_n_devise
+                        r_act.Prevision_n1_total=r_act.Prevision_n1_total-project.Prevision_n1_total
+                        r_act.Prevision_n1_devise=r_act.Prevision_n1_devise-project.Prevision_n1_devise
+                        r_act.Prevision_n2_total=r_act.Prevision_n2_total-project.Prevision_n2_total
+                        r_act.Prevision_n2_devise=r_act.Prevision_n2_devise-project.Prevision_n2_devise
+                        r_act.Prevision_n3_total=r_act.Prevision_n3_total-project.Prevision_n3_total
+                        r_act.Prevision_n3_devise=r_act.Prevision_n3_devise-project.Prevision_n3_devise
+                        r_act.Prevision_n4_total=r_act.Prevision_n4_total-project.Prevision_n4_total
+                        r_act.Prevision_n4_devise=r_act.Prevision_n4_devise-project.Prevision_n4_devise
+                        r_act.save()
+
+                        rog = Recap.objects.get(PMT=datetime.date.today().year+0,region=project.Perimetre.region,famille=project.Famille,activite=project.Perimetre.activite)
+                        rog.CGI_total= rog.CGI_total- project.Cout_Globale_initial_total
+                        rog.CGI_devise= rog.CGI_devise- project.Cout_Globale_initial_devise
+                        rog.Previson_de_cloture_total= rog.Previson_de_cloture_total- project.Previson_de_cloture_total
+                        rog.Previson_de_cloture_devise= rog.Previson_de_cloture_devise- project.Previson_de_cloture_devise
+                        rog.Reste_a_realiser_total= rog.Reste_a_realiser_total- project.Reste_a_realiser_total
+                        rog.Reste_a_realiser_devise= rog.Reste_a_realiser_devise- project.Reste_a_realiser_devise
+                        rog.Realisation_cum_total=rog.Realisation_cum_total-project.Realisation_cum_total
+                        rog.Realisation_cum_devise=rog.Realisation_cum_devise- project.Realisation_cum_devise
+                        rog.Realisation_S1_total=rog.Realisation_S1_total-project.Realisation_S1_total
+                        rog.Realisation_S1_devise=rog.Realisation_S1_devise-project.Realisation_S1_devise
+                        rog.Prevision_S2_total=rog.Prevision_S2_total-project.Prevision_S2_total
+                        rog.Prevision_S2_devise=rog.Prevision_S2_devise-project.Prevision_S2_devise
+                        rog.Prevision_n_total=rog.Prevision_n_total-project.Prevision_n_total
+                        rog.Prevision_n_devise=rog.Prevision_n_devise-project.Prevision_n_devise
+                        rog.Prevision_n1_total=rog.Prevision_n1_total-project.Prevision_n1_total
+                        rog.Prevision_n1_devise=rog.Prevision_n1_devise-project.Prevision_n1_devise
+                        rog.Prevision_n2_total=rog.Prevision_n2_total-project.Prevision_n2_total
+                        rog.Prevision_n2_devise=rog.Prevision_n2_devise-project.Prevision_n2_devise
+                        rog.Prevision_n3_total=rog.Prevision_n3_total-project.Prevision_n3_total
+                        rog.Prevision_n3_devise=rog.Prevision_n3_devise-project.Prevision_n3_devise
+                        rog.Prevision_n4_total=rog.Prevision_n4_total-project.Prevision_n4_total
+                        rog.Prevision_n4_devise=rog.Prevision_n4_devise-project.Prevision_n4_devise
+                        rog.save()
+                  else:
+            
+                        #if str(project.champ.activite)=="Pétrole" or str(project.champ.activite)=="Gaz" :
+                        r_act = Recap_activite.objects.get(PMT=datetime.date.today().year+0,activite=project.champ.activite)
+                        r_act.CGI_total= r_act.CGI_total- project.Cout_Globale_initial_total
+                        r_act.CGI_devise= r_act.CGI_devise- project.Cout_Globale_initial_devise
+                        r_act.Previson_de_cloture_total= r_act.Previson_de_cloture_total- project.Previson_de_cloture_total
+                        r_act.Previson_de_cloture_devise= r_act.Previson_de_cloture_devise- project.Previson_de_cloture_devise                       
+                        r_act.Reste_a_realiser_total= r_act.Reste_a_realiser_total- project.Reste_a_realiser_total
+                        r_act.Reste_a_realiser_devise= r_act.Reste_a_realiser_devise- project.Reste_a_realiser_devise                        
+                        r_act.Realisation_cum_total=r_act.Realisation_cum_total-project.Realisation_cum_total
+                        r_act.Realisation_cum_devise=r_act.Realisation_cum_devise- project.Realisation_cum_devise
+                        r_act.Realisation_S1_total=r_act.Realisation_S1_total-project.Realisation_S1_total
+                        r_act.Realisation_S1_devise=r_act.Realisation_S1_devise-project.Realisation_S1_devise
+                        r_act.Prevision_S2_total=r_act.Prevision_S2_total-project.Prevision_S2_total
+                        r_act.Prevision_S2_devise=r_act.Prevision_S2_devise-project.Prevision_S2_devise
+                        r_act.Prevision_n_total=r_act.Prevision_n_total-project.Prevision_n_total
+                        r_act.Prevision_n_devise=r_act.Prevision_n_devise-project.Prevision_n_devise
+                        r_act.Prevision_n1_total=r_act.Prevision_n1_total-project.Prevision_n1_total
+                        r_act.Prevision_n1_devise=r_act.Prevision_n1_devise-project.Prevision_n1_devise
+                        r_act.Prevision_n2_total=r_act.Prevision_n2_total-project.Prevision_n2_total
+                        r_act.Prevision_n2_devise=r_act.Prevision_n2_devise-project.Prevision_n2_devise
+                        r_act.Prevision_n3_total=r_act.Prevision_n3_total-project.Prevision_n3_total
+                        r_act.Prevision_n3_devise=r_act.Prevision_n3_devise-project.Prevision_n3_devise
+                        r_act.Prevision_n4_total=r_act.Prevision_n4_total-project.Prevision_n4_total
+                        r_act.Prevision_n4_devise=r_act.Prevision_n4_devise-project.Prevision_n4_devise
+                        r_act.save()
+
+                        rog = Recap.objects.get(PMT=datetime.date.today().year+0,region=project.Perimetre.region,famille=project.Famille,activite=project.champ.activite)
+                        rog.CGI_total= rog.CGI_total- project.Cout_Globale_initial_total
+                        rog.CGI_devise= rog.CGI_devise- project.Cout_Globale_initial_devise
+                        rog.Previson_de_cloture_total= rog.Previson_de_cloture_total- project.Previson_de_cloture_total
+                        rog.Previson_de_cloture_devise= rog.Previson_de_cloture_devise- project.Previson_de_cloture_devise
+                        rog.Reste_a_realiser_total= rog.Reste_a_realiser_total- project.Reste_a_realiser_total
+                        rog.Reste_a_realiser_devise= rog.Reste_a_realiser_devise- project.Reste_a_realiser_devise
+                        rog.Realisation_cum_total=rog.Realisation_cum_total-project.Realisation_cum_total
+                        rog.Realisation_cum_devise=rog.Realisation_cum_devise- project.Realisation_cum_devise
+                        rog.Realisation_S1_total=rog.Realisation_S1_total-project.Realisation_S1_total
+                        rog.Realisation_S1_devise=rog.Realisation_S1_devise-project.Realisation_S1_devise
+                        rog.Prevision_S2_total=rog.Prevision_S2_total-project.Prevision_S2_total
+                        rog.Prevision_S2_devise=rog.Prevision_S2_devise-project.Prevision_S2_devise
+                        rog.Prevision_n_total=rog.Prevision_n_total-project.Prevision_n_total
+                        rog.Prevision_n_devise=rog.Prevision_n_devise-project.Prevision_n_devise
+                        rog.Prevision_n1_total=rog.Prevision_n1_total-project.Prevision_n1_total
+                        rog.Prevision_n1_devise=rog.Prevision_n1_devise-project.Prevision_n1_devise
+                        rog.Prevision_n2_total=rog.Prevision_n2_total-project.Prevision_n2_total
+                        rog.Prevision_n2_devise=rog.Prevision_n2_devise-project.Prevision_n2_devise
+                        rog.Prevision_n3_total=rog.Prevision_n3_total-project.Prevision_n3_total
+                        rog.Prevision_n3_devise=rog.Prevision_n3_devise-project.Prevision_n3_devise
+                        rog.Prevision_n4_total=rog.Prevision_n4_total-project.Prevision_n4_total
+                        rog.Prevision_n4_devise=rog.Prevision_n4_devise-project.Prevision_n4_devise
+                        rog.save()
+            
+                              
+                  
+                  project.delete()
+                  messages.success(request,"le projet a été modifié avec succès")     
+                  return redirect('PMT')
+            return render(request,'delete.html')
+
+      
+      else:       #to delete stimulations
+            if request.method=="POST":
+                  stimulation=Stimulation.objects.get(stimulation_id=pk)
+                  stimulation.delete()
+                  messages.success(request,"la stimulation a été supprimé avec succès")     
+                  return redirect('PMT')
+            return render(request,'delete.html')
+
+
 #function to delete any project that do not have monthly prévisions
 def delete_project_without_previsions(request):
       p=Project.objects.all()
@@ -759,6 +937,7 @@ def add_project(request):
                                           Project_puit=p.Project_puit
                                           )
                         s.save()
+                        print(s.Project_puit)
                         request.session["id"]=s.stimulation_id
                         return redirect('/prevision_form')  
 
@@ -1274,14 +1453,15 @@ def add_prevision(request):
       if form.is_valid():
             #validation 
             somme_globale=form.cleaned_data['Montant_Prevu_janvier_Total']+form.cleaned_data['Montant_Prevu_fevrier_Total']+form.cleaned_data['Montant_Prevu_mars_Total']+form.cleaned_data['Montant_Prevu_avril_Total']+form.cleaned_data['Montant_Prevu_mai_Total']+form.cleaned_data['Montant_Prevu_juin_Total']+form.cleaned_data['Montant_Prevu_juiller_Total']+form.cleaned_data['Montant_Prevu_aout_Total']+form.cleaned_data['Montant_Prevu_septembre_Total']+form.cleaned_data['Montant_Prevu_octobre_Total']+form.cleaned_data['Montant_Prevu_novombre_Total']+form.cleaned_data['Montant_Prevu_decembre_Total']
-            somme_globale_int=int(form.cleaned_data['Montant_Prevu_janvier_Total'])+int(form.cleaned_data['Montant_Prevu_fevrier_Total'])+int(form.cleaned_data['Montant_Prevu_mars_Total'])+int(form.cleaned_data['Montant_Prevu_avril_Total'])+int(form.cleaned_data['Montant_Prevu_mai_Total'])+int(form.cleaned_data['Montant_Prevu_juin_Total'])+int(form.cleaned_data['Montant_Prevu_juiller_Total'])+int(form.cleaned_data['Montant_Prevu_aout_Total'])+int(form.cleaned_data['Montant_Prevu_septembre_Total'])+int(form.cleaned_data['Montant_Prevu_octobre_Total'])+int(form.cleaned_data['Montant_Prevu_novombre_Total'])+int(form.cleaned_data['Montant_Prevu_decembre_Total'])
-            somme_globale_rouned=round(form.cleaned_data['Montant_Prevu_janvier_Total'])+round(form.cleaned_data['Montant_Prevu_fevrier_Total'])+round(form.cleaned_data['Montant_Prevu_mars_Total'])+round(form.cleaned_data['Montant_Prevu_avril_Total'])+round(form.cleaned_data['Montant_Prevu_mai_Total'])+round(form.cleaned_data['Montant_Prevu_juin_Total'])+round(form.cleaned_data['Montant_Prevu_juiller_Total'])+round(form.cleaned_data['Montant_Prevu_aout_Total'])+round(form.cleaned_data['Montant_Prevu_septembre_Total'])+round(form.cleaned_data['Montant_Prevu_octobre_Total'])+round(form.cleaned_data['Montant_Prevu_novombre_Total'])+round(form.cleaned_data['Montant_Prevu_decembre_Total'])
+            somme_globale_int=int(somme_globale)
+            somme_globale_rouned=round(somme_globale)
 
             p = Project.objects.filter(id=request.session["id"]) 
             if p.exists():
                   n=Project.objects.get(id=request.session["id"])
-                  #needed to allow all 9 cases because the users asked for that (somtimes they used true values and other times int or rounded values)
-                  if somme_globale==n.Prevision_n_total or somme_globale_int==n.Prevision_n_total or somme_globale_rouned==n.Prevision_n_total or somme_globale==int(n.Prevision_n_total) or somme_globale_int==int(n.Prevision_n_total) or somme_globale_rouned==int(n.Prevision_n_total) or somme_globale==round(n.Prevision_n_total) or somme_globale_int==round(n.Prevision_n_total) or somme_globale_rouned==round(n.Prevision_n_total) :             
+                  print(n.Prevision_n_total,somme_globale,somme_globale_int,somme_globale_rouned)
+                  #needed to allow all cases because the users asked for that (somtimes they used true values and other times int or rounded values)
+                  if  somme_globale_int==n.Prevision_n_total or somme_globale_rouned==n.Prevision_n_total or somme_globale==int(n.Prevision_n_total) or somme_globale_int==int(n.Prevision_n_total) or somme_globale_rouned==int(n.Prevision_n_total) or somme_globale==round(n.Prevision_n_total) or somme_globale_int==round(n.Prevision_n_total) or somme_globale_rouned==round(n.Prevision_n_total) :             
                         new_prevision1=Prévision_mensuelle(Mois_prev="janvier",
                                           Montant_Prevu_Total=form.cleaned_data['Montant_Prevu_janvier_Total'],
                                           Montant_Prevu_Devise=form.cleaned_data['Montant_Prevu_janvier_devise'],
@@ -1599,7 +1779,7 @@ def add_prevision(request):
                         new_prevision11=Prévision_mensuelle_stimulation(Mois_prev="novombre",
                                           Montant_Prevu_Total=form.cleaned_data['Montant_Prevu_novombre_Total'],
                                           Montant_Prevu_Devise=form.cleaned_data['Montant_Prevu_novombre_devise'],
-                                          Stimulation=s,
+                                          Stimulation=n,
                                           Prev_cum_total = int(form.cleaned_data['Montant_Prevu_janvier_Total'])+int(form.cleaned_data['Montant_Prevu_fevrier_Total'])+
                                                       int(form.cleaned_data['Montant_Prevu_mars_Total'])+int(form.cleaned_data['Montant_Prevu_avril_Total'])+
                                                       int(form.cleaned_data['Montant_Prevu_mai_Total'])+int(form.cleaned_data['Montant_Prevu_juin_Total'])+
@@ -1618,7 +1798,7 @@ def add_prevision(request):
                         new_prevision12=Prévision_mensuelle_stimulation(Mois_prev="decembre",
                                           Montant_Prevu_Total=form.cleaned_data['Montant_Prevu_decembre_Total'],
                                           Montant_Prevu_Devise=form.cleaned_data['Montant_Prevu_decembre_devise'],
-                                          Stimulation=s,
+                                          Stimulation=n,
                                           Prev_cum_total = int(form.cleaned_data['Montant_Prevu_janvier_Total'])+int(form.cleaned_data['Montant_Prevu_fevrier_Total'])+
                                                       int(form.cleaned_data['Montant_Prevu_mars_Total'])+int(form.cleaned_data['Montant_Prevu_avril_Total'])+
                                                       int(form.cleaned_data['Montant_Prevu_mai_Total'])+int(form.cleaned_data['Montant_Prevu_juin_Total'])+
@@ -1652,27 +1832,91 @@ def add_prevision(request):
         
 ########################################## templates forms ##########################################
 
-def admin_home(request):
-      return render(request,'admin_home.html')
 
 @login_required(login_url='login')
 def home(request):
       return render(request,'home.html')
 
-@login_required(login_url='login')
-def add_monthly(request):
-      return render(request,'add_monthly.html')
 
-@login_required(login_url='login')
-def update_project (request,pk):
+
+
+
+                        
+                  
+
+            #pev=Prévision_mensuelle.objects.filter(Project.id=pk)
+
+
+
       project=Project.objects.filter(id=pk)
       if project.exists():
             project=Project.objects.get(id=pk)
-            form=add_project_Form(request.POST or None,instance=project)
+            form = update_project_Form(initial={'Compte_Analytique': project.Compte_Analytique,
+            'Libelles':project.Libelles,
+            'Structure_gerante':project.Structure_gerante,
+            'Perimetre':project.Perimetre,
+            #'Champ':project.Champ,
+            'Famille':project.Famille,
+            'Type':project.Type,
+            'Fiscalite':project.Fiscalite,
+            'Realisation_cum_total':project.Realisation_cum_total,
+            'Realisation_cum_devise':project.Realisation_cum_devise,
+            'Realisation_S1_total':project.Realisation_S1_total,
+            'Realisation_S1_devise':project.Realisation_S1_devise,
+            'Prevision_S2_total':project.Prevision_S2_total,
+            'Prevision_S2_devise':project.Prevision_S2_devise,
+            'Prevision_n_total':project.Prevision_n_total,
+            'Prevision_n_devise':project.Prevision_n_devise,
+            'Prevision_n1_total':project.Prevision_n1_total,
+            'Prevision_n1_devise':project.Prevision_n1_devise,
+            'Prevision_n2_total':project.Prevision_n2_total,
+            'Prevision_n2_devise':project.Prevision_n2_devise,    
+            'Prevision_n3_total':project.Prevision_n3_total,
+            'Prevision_n3_devise':project.Prevision_n3_devise,
+            'Prevision_n4_total':project.Prevision_n4_total,
+            'Prevision_n4_devise':project.Prevision_n4_devise,
+            'Point_situation':project.Point_situation,
+            }) 
+            #form=update_project_Form(request.POST or None, obj=project)
+            project.Compte_Analytique="Compte_Analytique"+"crypt"
             context={'form':form}
-            return render(request,'project_form.html',context)
+            #print(project.Champ)
+            return render(request,'project_form_update.html',context)
+            
             
       else:       #to update stimulations
-            if request.method=="POST":
-                  stimulation=Stimulation.objects.get(stimulation_id=pk)
+ 
+            stimulation=Stimulation.objects.get(stimulation_id=pk)
+            form = add_project_Form(initial={'Compte_Analytique': stimulation.Compte_Analytique,
+            'Libelles':stimulation.stimulation,
+            'Structure_gerante':stimulation.Structure_gerante,
+            'Perimetre':stimulation.Perimetre,
+            #'Champ':project.Champ,
+            'Famille':stimulation.Famille,
+            'Type':stimulation.Type,
+            'Fiscalite':stimulation.Fiscalite,
+            'Realisation_cum_total':stimulation.Realisation_cum_total,
+            'Realisation_cum_devise':stimulation.Realisation_cum_devise,
+            'Realisation_S1_total':stimulation.Realisation_S1_total,
+            'Realisation_S1_devise':stimulation.Realisation_S1_devise,
+            'Prevision_S2_total':stimulation.Prevision_S2_total,
+            'Prevision_S2_devise':stimulation.Prevision_S2_devise,
+            'Prevision_n_total':stimulation.Prevision_n_total,
+            'Prevision_n_devise':stimulation.Prevision_n_devise,
+            'Prevision_n1_total':stimulation.Prevision_n1_total,
+            'Prevision_n1_devise':stimulation.Prevision_n1_devise,
+            'Prevision_n2_total':stimulation.Prevision_n2_total,
+            'Prevision_n2_devise':stimulation.Prevision_n2_devise,
+            'Prevision_n3_total':stimulation.Prevision_n3_total,
+            'Prevision_n3_devise':stimulation.Prevision_n3_devise,
+            'Prevision_n4_total':stimulation.Prevision_n4_total,
+            'Prevision_n4_devise':stimulation.Prevision_n4_devise,
+            'Point_situation':stimulation.Point_situation,
+            }) 
+            #form=update_project_Form(request.POST or None, obj=project)
+
+            #print(project.Champ)
+            context={'form':form}
+            return render(request,'project_form_update.html',context)
+
 

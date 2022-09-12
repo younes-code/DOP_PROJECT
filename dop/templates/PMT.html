@@ -146,6 +146,7 @@
                       </div>
 
                 </th>
+                
                 {% if user.is_superuser %}
                 <th></th>
                 {% endif %}
@@ -188,10 +189,24 @@
                 <td>{{stimulation.Prevision_n3_devise|floatformat:"0"|intcomma}}</td>
                 <td>{{stimulation.Prevision_n4_total|floatformat:"0"|intcomma}}</td>
                 <td>{{stimulation.Prevision_n4_devise|floatformat:"0"|intcomma}}</td>
-                <td>{{stimulation.Point_situation}}</td>
+                <td style="word-wrap: break-word;min-width: 160px;max-width: 160px;">
+                    <p>
+                        <a class="btn btn-outline" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                            Afficher 
+                        </a>
+                    </p>
+                      <div class="collapse" id="collapseExample">
+                        <div class="card card-body">
+                            {{stimulation.Point_situation}}                        
+                        </div>
+                      </div>
+     
+                </td> 
                 {% if user.is_superuser %}
-                <td><a href="{% url 'delete_project' stimulation.stimulation_id %}" class="btn btn-outline-danger btn-sm ">
-                    supprimer</a></td>
+                <td>
+                    <a href="{% url 'delete_project' stimulation.stimulation_id %}" class="btn btn-outline-danger btn-sm ">
+                    supprimer</a>
+                </td>
                 {% endif %}
             </tr>   
             {% endfor %}
@@ -245,10 +260,13 @@
                 </td> 
 
                 {% if user.is_superuser %}
+
                 <td>
                     <a href="{% url 'delete_project' Project.id %}" class="btn btn-outline-danger btn-sm ">
                     supprimer</a>
-                </td>  
+                </td>
+                
+
                 {% endif %}
             </tr>   
             {% endfor %}
