@@ -1839,15 +1839,6 @@ def home(request):
 
 
 
-
-
-                        
-                  
-
-            #pev=Prévision_mensuelle.objects.filter(Project.id=pk)
-
-
-
       project=Project.objects.filter(id=pk)
       if project.exists():
             project=Project.objects.get(id=pk)
