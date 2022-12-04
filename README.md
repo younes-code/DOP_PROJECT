@@ -1,1 +1,1 @@
-# A web application that helps managing company invesments 
+## A web application that helps managing company invesments 
